@@ -8,5 +8,5 @@ public interface DAOFactura {
 	public TFactura buscarFactura(String id);
 	public int crearFactura(TFactura f);
 	public void mostrarFacturas();
-
+//que pasa
 }
