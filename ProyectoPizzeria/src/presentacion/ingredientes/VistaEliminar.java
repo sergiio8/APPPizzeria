@@ -20,7 +20,7 @@ public class VistaEliminar extends JDialog{
 		mainPanel.setLayout(new BorderLayout());
 		setContentPane(mainPanel);
 		
-		//tabla para listar
+		//combobox para eliminar con 2 botones de ok y cancel para confirmar la accion, es trivial pq es igual q el force laws dialog
 		
 		pack();
 		setResizable(false);
