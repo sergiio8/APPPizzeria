@@ -1,5 +1,5 @@
 package negocio.clientes;
 
-public class SAClientesImp {
+public class SAClientesImp implements SAClientes{
 
 }
