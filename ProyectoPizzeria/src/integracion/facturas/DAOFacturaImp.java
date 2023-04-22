@@ -32,7 +32,7 @@ public class DAOFacturaImp implements DAOFactura {
 	}
 	
 	public int crearFactura(TFactura fact) {
-		return -1;
+		return -2;
 		
 		
 		
