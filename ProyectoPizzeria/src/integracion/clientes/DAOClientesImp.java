@@ -3,6 +3,10 @@ package integracion.clientes;
 import negocio.clientes.TCliente;
 
 public class DAOClientesImp implements DAOClientes{
+	
+	public DAOClientesImp() {
+		
+	}
 
 	@Override
 	public int insertarCliente(TCliente cliente) {

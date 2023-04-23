@@ -26,10 +26,6 @@ public class TFactura {
 		return datos.getid_cliente();
 	}
 	
-	public String getIdVendedor() {
-		return datos.getid_vendedor();
-	}
-	
 	public double getPrecio_total() {
 		return precio_total;
 	}
@@ -52,10 +48,6 @@ public class TFactura {
 	
 	public void setIdCliente(String IdCliente) {
 		datos.setId_cliente(IdCliente);
-	}
-	
-	public void setIdVendedor(String IdVendedor) {
-		datos.setId_vendedor(IdVendedor);
 	}
 	
 	public void setPrecio_total(double Precio_total) {
