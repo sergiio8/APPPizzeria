@@ -32,7 +32,6 @@ public class SAFacturaImp implements SAFactura{
 		if (buscarCliente(cliente.getid_cliente()) != null) {
 			for (TLineaFactura f : carrito.getProductos()) {
 				TPlato plato = daop.obtenPlato(f.getIdProducto());
-				
 				if (plato != null) {
 					if (plato.get < f.getCantidad()) {
 						f.setCantidad(stock);
@@ -91,7 +90,6 @@ public class SAFacturaImp implements SAFactura{
 		f.setProductos(productos);
 		daof.modificarFactura(f);
 		// TODO Auto-generated method stub
-		
 	}
 	
 
