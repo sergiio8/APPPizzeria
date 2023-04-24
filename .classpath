@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="ProyectoPizzeria/src"/>
+	<classpathentry kind="lib" path="/PhysicsSimulatorTP2/lib/json.jar"/>
 	<classpathentry kind="output" path="ProyectoPizzeria/bin"/>
 </classpath>
