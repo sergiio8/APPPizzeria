@@ -8,14 +8,14 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 public class SAClientesImp implements SAClientes{
 
 	@Override
-	public String alta(TCliente c) {
+	public String alta(TCliente c) {// si cliente ya existía devuelve null
 		
-		String id = "";
+		String id = null;
 		DAOClientes infoCliente = FactoriaAbstractaIntegracion.getInstace().crearDAOCliente();
 		
 		if(c != null) {
 			TCliente cliente = infoCliente.obtenCliente(c.getId());
-			if(cliente != null) {
+			if(cliente == null) {
 				id = infoCliente.insertarCliente(cliente);
 			}
 		}
