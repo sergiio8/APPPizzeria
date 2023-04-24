@@ -2,6 +2,7 @@ package negocio.factoria;
 
 import negocio.facturas.SAFactura;
 import negocio.mesas.SAMesas;
+import negocio.producto.SAPlato;
 
 public abstract class FactoriaAbstractaNegocio {
 	
@@ -20,4 +21,5 @@ public abstract class FactoriaAbstractaNegocio {
 	
 	public abstract SAMesas crearSAMesas();
 	public abstract SAFactura crearSAFactura();
+	public abstract SAPlato crearSAPlato();
 }

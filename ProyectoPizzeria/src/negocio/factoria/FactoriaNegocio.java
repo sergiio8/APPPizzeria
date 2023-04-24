@@ -4,6 +4,8 @@ import negocio.facturas.SAFactura;
 import negocio.facturas.SAFacturaImp;
 import negocio.mesas.SAMesas;
 import negocio.mesas.SAMesasImp;
+import negocio.producto.SAPlato;
+import negocio.producto.SAPlatoImp;
 
 public class FactoriaNegocio extends FactoriaAbstractaNegocio {
 
@@ -15,6 +17,10 @@ public class FactoriaNegocio extends FactoriaAbstractaNegocio {
 	
 	public SAFactura crearSAFactura() {
 		return new SAFacturaImp();
+	}
+	
+	public SAPlato crearSAPlato() {
+		return new SAPlatoImp();
 	}
 
 }
