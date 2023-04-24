@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import presentacion.Evento;
 import presentacion.IGUI;
 
-public class VistaAñadirMesa extends JDialog implements IGUI{
+public class VistaAnadirMesa extends JDialog implements IGUI{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -34,10 +34,10 @@ public class VistaAñadirMesa extends JDialog implements IGUI{
 	private JRadioButton pbButton;
 	private JRadioButton p1Button;
 	
-	public VistaAñadirMesa(Frame parent) {
+	public VistaAnadirMesa(Frame parent) {
 		super(parent, true);
 		
-		setTitle("Añadir Mesa");
+		setTitle("Anadir Mesa");
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		setContentPane(mainPanel);

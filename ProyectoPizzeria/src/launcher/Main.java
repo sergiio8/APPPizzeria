@@ -1,6 +1,6 @@
 package launcher;
 
-import presentacion.mesas.VistaAñadirMesa;
+import presentacion.mesas.VistaAnadirMesa;
 
 public class Main {
 	
