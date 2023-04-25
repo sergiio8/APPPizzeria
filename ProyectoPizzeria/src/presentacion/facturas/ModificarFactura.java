@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -59,7 +60,19 @@ public class ModificarFactura extends JDialog implements IGUI{
 
 	@Override
 	public void actualizar(Evento e, Object datos) {
-		// TODO Auto-generated method stub
+		switch(e) {
+		case MODIFICAR_FACTURA_VISTA:
+			setVisible(true);
+			break;
+		case MODIFICAR_FACTURA_VISTA_OK:
+			JOptionPane.showMessageDialog(this,"Factura con ID " + datos.toString() + " modificada correctamente" ,"Factura con ID " + datos.toString() + " modificada correctamente", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
+			break;
+		case MODIFICAR_FACTURA_VISTA_WR:
+			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
+			setVisible(false);
+			break;
+		}
 		
 	}
 

@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -69,7 +70,19 @@ public class CerrarVenta extends JDialog implements IGUI{
 
 	@Override
 	public void actualizar(Evento e, Object datos) {
-		// TODO Auto-generated method stub
+		switch(e) {
+		case ALTA_FACTURA_VISTA:
+			setVisible(true);
+			break;
+		case ALTA_FACTURA_VISTA_OK:
+			JOptionPane.showMessageDialog(this,"Factura anadida correctamente con ID: " + datos.toString() ,"Factura anadida correctamente con ID: " + datos.toString(), JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
+			break;
+		case ALTA_FACTURA_VISTA_WR:
+			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
+			setVisible(false);
+			break;
+		}
 		
 	}
 

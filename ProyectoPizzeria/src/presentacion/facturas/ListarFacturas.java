@@ -7,10 +7,23 @@ import presentacion.Evento;
 import presentacion.IGUI;
 
 public class ListarFacturas extends JDialog implements IGUI{
+	public ListarFacturas(JFrame parent) {
+		super(parent, true);
+		initGUI();
+
+	}
+	
+	private void initGUI() {
+		
+	}
 
 	@Override
 	public void actualizar(Evento e, Object datos) {
-		// TODO Auto-generated method stub
+		switch(e) {
+		case LISTAR_FACTURAS_VISTA:
+			setVisible(true);
+			break;
+		}
 		
 	}
 

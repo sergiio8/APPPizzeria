@@ -8,6 +8,11 @@ import presentacion.IGUI;
 import presentacion.mesas.VistaAnadirMesa;
 import presentacion.mesas.VistaBorrarMesa;
 import presentacion.clientes.*;
+import presentacion.facturas.AnadirProducto;
+import presentacion.facturas.BuscarFactura;
+import presentacion.facturas.CerrarVenta;
+import presentacion.facturas.ListarFacturas;
+import presentacion.facturas.ModificarFactura;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	
@@ -21,8 +26,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaClienteLogueado = null;
 	private IGUI vistaClienteNoRegistrado = null;
 	private IGUI vistaPrincipalClientes = null;
-	
-	
+	private IGUI vistaAltaFactura = null;
+	private IGUI vistaModificarFactura = null;
+	private IGUI vistaBuscarFactura = null;
+	private IGUI vistaAnadirProducto = null;
+	private IGUI vistaListarFacturas = null;
+
 	@Override
 	public IGUI createVista(Evento e) {
 		switch(e) {
@@ -82,7 +91,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaAnadirProducto = new AnadirProducto(null);
 			}
 			return vistaAnadirProducto;
-			
 		default:
 			return null;
 		}
