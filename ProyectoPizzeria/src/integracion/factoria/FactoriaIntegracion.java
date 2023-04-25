@@ -42,6 +42,6 @@ public class FactoriaIntegracion extends FactoriaAbstractaIntegracion {
 	
 	public DAOLineaFactura crearDAOLineaFactura() {
 		return new DAOLineaFacturaImp();
-	}
+	}//cambios
 
 }
