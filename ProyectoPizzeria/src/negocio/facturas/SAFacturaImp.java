@@ -70,7 +70,7 @@ public class SAFacturaImp implements SAFactura{
     @Override
     public boolean modificarFactura(TLineaFactura linea) {
         DAOFactura daof = FactoriaAbstractaIntegracion.getInstace().crearDAOFactura();
-        return daof.modificarFactura(linea.getIdFactura(), linea);
+        return daof.modificarFactura(linea);
         // TODO Auto-generated method stub
         
     }
