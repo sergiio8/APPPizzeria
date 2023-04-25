@@ -28,8 +28,8 @@ public class DAOFacturaImp implements DAOFactura {
     }
     
     
-    public boolean modificarFactura(TFactura f) {
-        TFactura factura = buscarFactura(f.getId());
+    public boolean modificarFactura(String id, TLineaFactura l) {
+        TFactura factura = buscarFactura(l.getId());
         if (factura != null) {
             //modificarla en base de datos
             return true;

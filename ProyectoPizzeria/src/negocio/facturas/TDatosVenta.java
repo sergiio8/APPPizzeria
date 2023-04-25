@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class TDatosVenta {
 	private ArrayList<TLineaFactura> productos;
+	private String id_factura;
 	private String id_vendedor;
 	private String id_cliente;
 	
-	public TDatosVenta(ArrayList<TLineaFactura> productos, String Id_vendedor, String Id_cliente) {
+	public TDatosVenta(ArrayList<TLineaFactura> productos, String Id_factura, String Id_vendedor, String Id_cliente) {
 	    this.productos = productos;
+	    id_factura = Id_factura;
 		id_vendedor = Id_vendedor;
 		id_cliente = Id_cliente;
 	}
@@ -25,6 +27,10 @@ public class TDatosVenta {
 		return id_cliente;
 	}
 	
+	public String getid_factura() {
+		return id_factura;
+	}
+	
 	public void setProductos(ArrayList<TLineaFactura> prod) {
 		this.productos = prod;
 	}
@@ -35,6 +41,10 @@ public class TDatosVenta {
 	
 	public void setId_cliente(String Id_cliente) {
 		id_cliente = Id_cliente;
+	}
+	
+	public void getid_factura(String ID_factura) {
+		id_factura = ID_factura;
 	}
 	
 

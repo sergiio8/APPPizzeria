@@ -2,6 +2,7 @@ package presentacion.facturas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,14 +12,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import negocio.facturas.TDatosVenta;
+import negocio.facturas.TLineaFactura;
+import negocio.mesas.TMesas;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
+import presentacion.mesas.VistaAnadirMesa;
 
 public class CerrarVenta extends JDialog implements IGUI{
+	
+	JTextField text1;
+	JTextField text2;
+	JTextField text3;
+	
 	public CerrarVenta(JFrame parent) {
 		super(parent, true);
 		initGUI();
-		//cambio
+
 	}
 	
 	private void initGUI() {
@@ -28,44 +39,66 @@ public class CerrarVenta extends JDialog implements IGUI{
 		setContentPane(mainPanel);
 		
 		JPanel panel1 = new JPanel(new FlowLayout());
-		JLabel ID = new JLabel("ID_cliente: ");
-		JTextField text1 = new JTextField();
+		JLabel ID_factura = new JLabel("ID_factura: ");
+		text1 = new JTextField();
 		
-		panel1.add(ID);
+		panel1.add(ID_factura);
 		panel1.add(text1);
 		
 		mainPanel.add(panel1, BorderLayout.CENTER);
 		
 		JPanel panel2 = new JPanel(new FlowLayout());
-		JLabel ID_vendedor = new JLabel("ID_vendedor: ");
-		JTextField text2 = new JTextField();
+		JLabel ID_cliente = new JLabel("ID_cliente: ");
+		text2 = new JTextField();
 		
-		panel2.add(ID_vendedor);
+		panel2.add(ID_cliente);
 		panel2.add(text2);
 		
 		mainPanel.add(panel2, BorderLayout.CENTER);
 		
 		JPanel panel3 = new JPanel(new FlowLayout());
+		JLabel ID_vendedor = new JLabel("ID_vendedor: ");
+		text3 = new JTextField();
 		
+		panel3.add(ID_vendedor);
+		panel3.add(text3);
+		
+		mainPanel.add(panel3, BorderLayout.CENTER);
+		
+		JPanel panel4 = new JPanel(new FlowLayout());
 		
 
 		JButton cerrar = new JButton("Cerrar venta");
 		cerrar.addActionListener((e) -> cerrar());
 		JButton cancelar = new JButton("Cancelar");
 	    cancelar.addActionListener((e) -> cancelar());
-	    panel3.add(cerrar);
-	    panel3.add(cancelar);
+	    panel4.add(cerrar);
+	    panel4.add(cancelar);
 		
-		mainPanel.add(panel3, BorderLayout.CENTER);
+		mainPanel.add(panel4, BorderLayout.CENTER);
 	}
 	
 	private void cerrar() {
-		
-		
+		String ID_factura;
+		String ID_cliente;
+		String ID_vendedor;
+		try {
+			ID_factura = text1.getText();
+			ID_cliente = text2.getText();
+			ID_vendedor = text3.getText();
+			if(ID_cliente == null || ID_vendedor == null) {
+				throw new IllegalArgumentException();
+			}
+			Controlador.getInstance().accion(Evento.ALTA_FACTURA, new TDatosVenta(new ArrayList<TLineaFactura>(), ID_factura, ID_cliente, ID_vendedor));
+			
+		}
+		catch(IllegalArgumentException iae) {
+			JOptionPane.showMessageDialog(CerrarVenta.this, "ERROR: rellene todos los campos relativos a los IDs", "ERROR: rellene todos los campos relativos a los IDs", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void cancelar() {
-		
+		setVisible(false);
 	}
 
 	@Override
@@ -77,6 +110,7 @@ public class CerrarVenta extends JDialog implements IGUI{
 		case ALTA_FACTURA_VISTA_OK:
 			JOptionPane.showMessageDialog(this,"Factura anadida correctamente con ID: " + datos.toString() ,"Factura anadida correctamente con ID: " + datos.toString(), JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
+			initGUI();
 			break;
 		case ALTA_FACTURA_VISTA_WR:
 			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);

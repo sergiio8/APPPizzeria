@@ -1,7 +1,10 @@
 package presentacion.facturas;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -14,6 +17,12 @@ public class ListarFacturas extends JDialog implements IGUI{
 	}
 	
 	private void initGUI() {
+		setTitle("Listar facturas");
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		setContentPane(mainPanel);
+		//hacer un jtable
+		
 		
 	}
 
