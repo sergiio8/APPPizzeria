@@ -8,6 +8,11 @@ import presentacion.IGUI;
 import presentacion.mesas.VistaAnadirMesa;
 import presentacion.mesas.VistaBorrarMesa;
 import presentacion.clientes.*;
+import presentacion.facturas.AnadirProducto;
+import presentacion.facturas.BuscarFactura;
+import presentacion.facturas.CerrarVenta;
+import presentacion.facturas.ListarFacturas;
+import presentacion.facturas.ModificarFactura;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	
@@ -20,7 +25,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaClienteLogueado = null;
 	private IGUI vistaClienteNoRegistrado = null;
 	private IGUI vistaPrincipalClientes = null;
-	
+	private IGUI vistaAltaFactura = null;
+	private IGUI vistaModificarFactura = null;
+	private IGUI vistaBuscarFactura = null;
+	private IGUI vistaAnadirProducto = null;
+	private IGUI vistaListarFacturas = null;
 	@Override
 	public IGUI createVista(Evento e) {
 		switch(e) {
@@ -50,7 +59,32 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaPrincipalClientes= new VistaPrincipalCliente();
 			}
 			return vistaPrincipalClientes;
-			
+		case ALTA_FACTURA_VISTA:
+			if (vistaAltaFactura == null) {
+				vistaAltaFactura = new CerrarVenta(null);
+			}
+			return vistaAltaFactura;
+		case BUSCAR_FACTURA_VISTA:
+			if (vistaBuscarFactura == null) {
+				vistaBuscarFactura = new BuscarFactura(null);
+			}
+			return vistaBuscarFactura;
+		case MODIFICAR_FACTURA_VISTA:
+			if (vistaModificarFactura == null) {
+				vistaModificarFactura = new ModificarFactura(null);
+			}
+			return vistaModificarFactura;
+		case LISTAR_FACTURAS_VISTA:
+			if (vistaListarFacturas == null) {
+				vistaListarFacturas = new ListarFacturas(null);
+			}
+			return vistaListarFacturas;
+		case ANADIR_PRODUCTO_VISTA:
+			if (vistaAnadirProducto == null) {
+				vistaAnadirProducto = new AnadirProducto(null);
+			}
+			return vistaAnadirProducto;
+		
 		default:
 			return null;
 		}

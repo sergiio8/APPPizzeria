@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -74,7 +75,19 @@ public class AnadirProducto extends JDialog implements IGUI{
 
 	@Override
 	public void actualizar(Evento e, Object datos) {
-		// TODO Auto-generated method stub
+		switch(e) {
+		case ANADIR_PRODUCTO_VISTA:
+			setVisible(true);
+			break;
+		case ANADIR_PRODUCTO_VISTA_OK:
+			JOptionPane.showMessageDialog(this,"Producto anadido correctamente con ID: " + datos.toString() ,"Producto anadido correctamente con ID: " + datos.toString(), JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
+			break;
+		case ANADIR_PRODUCTO_VISTA_WR:
+			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
+			setVisible(false);
+			break;
+		}
 		
 	}
 

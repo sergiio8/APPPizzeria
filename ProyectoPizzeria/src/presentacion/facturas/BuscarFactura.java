@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -59,7 +60,18 @@ public class BuscarFactura extends JDialog implements IGUI{
 
 	@Override
 	public void actualizar(Evento e, Object datos) {
-		// TODO Auto-generated method stub
+		switch(e) {
+		case BUSCAR_FACTURA_VISTA:
+			setVisible(true);
+			break;
+		case BUSCAR_FACTURA_VISTA_OK:
+			
+			break;
+		case BUSCAR_FACTURA_VISTA_WR:
+			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
+			setVisible(false);
+			break;
+		}
 		
 	}
 	
