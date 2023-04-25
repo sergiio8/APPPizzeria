@@ -6,13 +6,18 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import integracion.factoria.FactoriaAbstractaIntegracion;
+import negocio.facturas.TDatosVenta;
+import negocio.facturas.TFactura;
 import negocio.facturas.TLineaFactura;
+import negocio.mesas.TMesas;
 
 public class DAOLineaFacturaImp implements DAOLineaFactura{
     
@@ -22,21 +27,77 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
 
     @Override
     public boolean modificarLineaFactura(TLineaFactura linea) {
-        TLineaFactura l = buscarLineaFactura(linea.getId());
-        if (l != null) {
-            //modificar la base de datos
-            return true;
-        }
-        else return false;
+    	boolean res = true;
+    	
+		
+		JSONArray ja = null;
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/LineasFactura.json"))){ 
+			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
+			ja = jsonInput.getJSONArray("ListaLineasFactura");
+			
+		}
+		catch(Exception e1) {
+			return false;
+		}
+		
+		int i = 0;
+		while(i < ja.length() && ja.getJSONObject(i).get("id") != linea.getId()) {
+			i++;
+		}
+		if(i == ja.length()) {
+			return false;
+		}
+		
+		ja.remove(i);
+		JSONObject jo = new JSONObject();
+		jo.put("id_factura", linea.getIdFactura());
+		jo.put("id", linea.getId());
+		jo.put("producto", linea.getIdProducto());
+		jo.put("cantidad", linea.getCantidad());
+		ja.put(jo);
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter("ProyectoPizzeria/resources/Facturass.json", false))){
+			JSONObject jo2 = new JSONObject();
+			jo2.put("ListaFacturas", ja);
+			bw.write(jo2.toString());
+			
+		} 
+		catch(Exception e2) {
+			res = false;
+		}
+		
+		return res;
         
     
     }
 
     @Override
     public TLineaFactura buscarLineaFactura(String id) {
-        //lectura base de datos y pasar datos por parametro
-        TLineaFactura linea = new TLineaFactura(null, null, null, 0);
-        return linea;
+    	JSONArray ja = null;
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/LineasFactura.json"))){ 
+			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
+			ja = jsonInput.getJSONArray("ListaLineasFactura");
+		}
+		catch(Exception e1) {
+			return null;
+		}
+		
+		int i = 0;
+		while(i < ja.length() && ja.getJSONObject(i).get("id") != id) {
+			i++;
+		}
+		if(i == ja.length()) {
+			return null;
+		}
+		else {
+			try {
+				return new TLineaFactura(ja.getJSONObject(i).getString("id"), ja.getJSONObject(i).getString("id_factura"), ja.getJSONObject(i).getString("producto"), ja.getJSONObject(i).getInt("cantidad"));
+			}
+			catch(Exception e) {
+				return null;
+			}
+			
+		}
     }
 
     @Override
@@ -67,11 +128,6 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        
-    }
-
-    public void listarLineaFactura() {
-        // TODO Auto-generated method stub
         
     }
     
