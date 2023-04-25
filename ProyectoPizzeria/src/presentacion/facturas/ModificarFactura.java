@@ -104,10 +104,7 @@ public class ModificarFactura extends JDialog implements IGUI{
 			String ID_Producto = text3.getText();
 			int Cantidad = Integer.parseInt(cantidad.getValue().toString());
 			
-			if (ID_Factura == null || ID_Linea == null || ID_Producto == null) {
-				throw new IllegalArgumentException();
-			}
-			else if (Cantidad <= 0) {
+			if (Cantidad <= 0) {
 				throw new NumberFormatException();
 			}
 			
@@ -116,9 +113,7 @@ public class ModificarFactura extends JDialog implements IGUI{
 		catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(ModificarFactura.this, "ERROR: la cantidad debe ser un entero positivo", "ERROR: la cantidad debe ser un entero positivo", JOptionPane.ERROR_MESSAGE);
 		}
-		catch(IllegalArgumentException iae) {
-			JOptionPane.showMessageDialog(ModificarFactura.this, "ERROR: relllene todos los campos relativos a los IDs", "ERROR: relllene todos los campos relativos a los IDs", JOptionPane.ERROR_MESSAGE);
-		}
+		
 		
 		
 		

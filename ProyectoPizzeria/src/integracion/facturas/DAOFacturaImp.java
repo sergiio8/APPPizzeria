@@ -58,14 +58,21 @@ public class DAOFacturaImp implements DAOFactura {
 			j++;
 		}
 		
+		JSONObject jo = ja.getJSONObject(i).getJSONArray("lineas").getJSONObject(j);
 		ja.getJSONObject(i).getJSONArray("lineas").remove(j);
-		JSONObject jo = new JSONObject();
+		
 		DAOLineaFactura daol = FactoriaAbstractaIntegracion.getInstace().crearDAOLineaFactura();
 		daol.modificarLineaFactura(l);
-        jo.put("id_factura", l.getIdFactura());
-        jo.put("id", l.getId());
-        jo.put("producto", l.getIdProducto());
-        jo.put("cantidad", l.getCantidad());
+		if (l.getIdProducto() != null) {
+			jo.remove("producto");
+			jo.put("producto", l.getIdProducto());
+		}
+		if (l.getCantidad() != jo.getDouble("cantidad")) {
+			jo.remove("cantidad");
+			jo.put("cantidad", l.getCantidad());
+		}
+        
+   
         ja.getJSONObject(i).getJSONArray("lineas").put(ja.getJSONObject(i).getJSONArray("lineas").length(), jo);
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter("ProyectoPizzeria/resources/Facturass.json", false))){
