@@ -68,9 +68,9 @@ public class SAFacturaImp implements SAFactura{
 
 
     @Override
-    public boolean modificarFactura(TFactura f) {
+    public boolean modificarFactura(TLineaFactura linea) {
         DAOFactura daof = FactoriaAbstractaIntegracion.getInstace().crearDAOFactura();
-        return daof.modificarFactura(f);
+        return daof.modificarFactura(linea.getIdFactura(), linea);
         // TODO Auto-generated method stub
         
     }
@@ -88,9 +88,7 @@ public class SAFacturaImp implements SAFactura{
     }
 
     @Override
-    public void anadirProducto(String ID, int cantidad, TPlato p, Carrito c) {//se añade al transfer o a la base de datos
-        
-        TLineaFactura linea = new TLineaFactura("nuevo_id",ID , p.getId(), cantidad);
+    public void anadirProducto(TLineaFactura linea, Carrito c) {//se añade al transfer o a la base de datos
         c.anadirProducto(linea);
        
         // TODO Auto-generated method stub

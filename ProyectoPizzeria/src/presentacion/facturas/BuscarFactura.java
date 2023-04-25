@@ -2,6 +2,7 @@ package presentacion.facturas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,10 +12,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import negocio.facturas.TDatosVenta;
+import negocio.facturas.TLineaFactura;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
 
 public class BuscarFactura extends JDialog implements IGUI{
+	JTextField text1;
 	public BuscarFactura(JFrame parent) {
 		super(parent, true);
 		initGUI();
@@ -28,7 +33,7 @@ public class BuscarFactura extends JDialog implements IGUI{
 		
 		JPanel panel1 = new JPanel(new FlowLayout());
 		JLabel ID = new JLabel("ID_factura: ");
-		JTextField text1 = new JTextField();
+		text1 = new JTextField();
 		
 		panel1.add(ID);
 		panel1.add(text1);
@@ -50,11 +55,23 @@ public class BuscarFactura extends JDialog implements IGUI{
 	}
 	
 	private void buscar() {
+		String ID_factura = null;
+		try {
+			ID_factura = text1.getText();
+			if (ID_factura == null) {
+				throw new IllegalArgumentException();
+			}
+			Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, ID_factura);
+		}
+		catch(IllegalArgumentException iae) {
+			JOptionPane.showMessageDialog(BuscarFactura.this, "ERROR: rellene el campo indicando el ID de la factura", "ERROR: rellene el campo indicando el ID de la factura", JOptionPane.ERROR_MESSAGE);
+		}
 		
 		
 	}
 	
 	private void cancelar() {
+		setVisible(false);
 		
 	}
 
@@ -65,6 +82,8 @@ public class BuscarFactura extends JDialog implements IGUI{
 			setVisible(true);
 			break;
 		case BUSCAR_FACTURA_VISTA_OK:
+			JOptionPane.showMessageDialog(this,"Factura con ID: " + datos.toString() + " encontrada con exito" ,"Factura con ID: " + datos.toString() + " encontrada con exito" , JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
 			
 			break;
 		case BUSCAR_FACTURA_VISTA_WR:
