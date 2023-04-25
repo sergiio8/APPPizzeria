@@ -57,6 +57,31 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaPrincipalClientes= new VistaPrincipalCliente();
 			}
 			return vistaPrincipalClientes;
+		case ALTA_FACTURA_VISTA:
+			if (vistaAltaFactura == null) {
+				vistaAltaFactura = new CerrarVenta(null);
+			}
+			return vistaAltaFactura;
+		case BUSCAR_FACTURA_VISTA:
+			if (vistaBuscarFactura == null) {
+				vistaBuscarFactura = new BuscarFactura(null);
+			}
+			return vistaBuscarFactura;
+		case MODIFICAR_FACTURA_VISTA:
+			if (vistaModificarFactura == null) {
+				vistaModificarFactura = new ModificarFactura(null);
+			}
+			return vistaModificarFactura;
+		case LISTAR_FACTURAS_VISTA:
+			if (vistaListarFacturas == null) {
+				vistaListarFacturas = new ListarFacturas(null);
+			}
+			return vistaListarFacturas;
+		case ANADIR_PRODUCTO_VISTA:
+			if (vistaAnadirProducto == null) {
+				vistaAnadirProducto = new AnadirProducto(null);
+			}
+			return vistaAnadirProducto;
 			
 		default:
 			return null;
