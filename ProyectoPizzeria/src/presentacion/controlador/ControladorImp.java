@@ -64,7 +64,7 @@ public class ControladorImp extends Controlador { //implementacion
 			buscaMesa(datos);
 			break;
 			
-        case ALTA_FACTURA_VISTA:
+                case ALTA_FACTURA_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA, null);
 			break;
 		case MODIFICAR_FACTURA_VISTA:
@@ -94,7 +94,7 @@ public class ControladorImp extends Controlador { //implementacion
 			else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_WR, tf);
 			break;
 		case MODIFICAR_FACTURA:
-			boolean sol3 = saFact.modificarFactura((TFactura) datos);
+			boolean sol3 = saFact.modificarFactura((TLineaFactura) datos);
 			if (sol3) FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_FACTURA_VISTA).actualizar(Evento.MODIFICAR_FACTURA_VISTA_OK, sol3);
 			else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_FACTURA_VISTA).actualizar(Evento.MODIFICAR_FACTURA_VISTA_WR, sol3);
 			break;
@@ -104,7 +104,7 @@ public class ControladorImp extends Controlador { //implementacion
 		case ANADIR_PRODUCTO:
 			TLineaFactura tf2 = (TLineaFactura) datos;
 			if (tf2 != null) {
-				carrito.anadirProducto(tf2);
+				saFact.anadirProducto(tf2, carrito);
 				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ANADIR_PRODUCTO_VISTA).actualizar(Evento.ANADIR_PRODUCTO_VISTA_OK, null);
 			}
 			else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ANADIR_PRODUCTO_VISTA).actualizar(Evento.ANADIR_PRODUCTO_VISTA_WR, null);
