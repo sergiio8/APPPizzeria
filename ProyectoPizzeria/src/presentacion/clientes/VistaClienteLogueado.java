@@ -1,23 +1,26 @@
 package presentacion.clientes;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentacion.Evento;
 import presentacion.IGUI;
 
-public class VistaClienteLogueado extends JFrame implements IGUI{
+public class VistaClienteLogueado extends JDialog implements IGUI{
 	
 	
 	private JButton modificarDatos;
 	private JButton realizarReserva;
 	
-	public VistaClienteLogueado() {
+	public VistaClienteLogueado(Frame parent) {
+		super(parent ,true);
 		
 		
 		JPanel mainPanel = new JPanel();
@@ -69,7 +72,7 @@ public class VistaClienteLogueado extends JFrame implements IGUI{
 		// TODO Auto-generated method stub
 		
 		switch(e) {
-		case CLIENTE_REGISTRADO:
+		case CLIENTE_LOGUEADO:
 			this.setVisible(true);
 			this.setTitle("Pantalla del cliente: " + (String)datos);
 		}

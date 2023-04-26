@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -120,9 +121,10 @@ public class VistaPrincipalCliente extends JFrame implements IGUI{
 	@Override
 	public void actualizar(Evento e, Object datos) {
 		// TODO Auto-generated method stub
-		if(this.isVisible()) {
-			this.setVisible(false);
+		switch(e) {
+		case CLIENTE_NO_REGISTRADO:
+			JOptionPane.showMessageDialog(this, "Ningún cliente registrado con id " + datos.toString(), "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
+			break;
 		}
-		else this.setVisible(true);
 	}
 }
