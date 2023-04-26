@@ -115,22 +115,14 @@ public class ControladorImp extends Controlador { //implementacion
 			abrirVenta(datos);
 			break;
 		case BUSCA_CLIENTE:
-			SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
-			TCliente c = infoCliente.consulta((String)datos);
-			if (c == null) {
-				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.CLIENTE_NO_REGISTRADO).actualizar(Evento.CLIENTE_NO_REGISTRADO, datos);
-			}
-			else {
-				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.CLIENTE_REGISTRADO).actualizar(Evento.CLIENTE_REGISTRADO, datos);
-				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ACTUALIZAR_VISTA_CLIENTES).actualizar(Evento.ACTUALIZAR_VISTA_CLIENTES, datos);
-				
-			}
+			buscarCliente(datos);
 			break;
 			
 		case VISTA_REGISTRO_DE_CLIENTE:
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_REGISTRO_DE_CLIENTE).actualizar(Evento.ACTUALIZAR_VISTA_CLIENTES, datos);
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ACTUALIZAR_VISTA_CLIENTES).actualizar(Evento.ACTUALIZAR_VISTA_CLIENTES, datos);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_REGISTRO_DE_CLIENTE).actualizar(Evento.VISTA_REGISTRO_DE_CLIENTE, datos);
 			break;
+		case REGISTRO_DE_CLIENTE:
+			registroCliente(datos)
 			
 		case ALTA_PLATO_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_VISTA, null);
@@ -345,6 +337,29 @@ public class ControladorImp extends Controlador { //implementacion
 		carrito = new Carrito();
 	}
 	
+	private void buscarCliente(Object datos) {
+		SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
+		TCliente c = infoCliente.consulta((String)datos);
+		if (c == null) {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento. VISTA_PRINCIPAL_CLIENTES).actualizar(Evento.CLIENTE_NO_REGISTRADO, datos);
+		}
+		else {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_REGISTRADO).actualizar(Evento.CLIENTE_LOGUEADO, datos);
+			
+		}
+	}
+	
+	private void registroCliente(Object datos) {
+		TCliente cliente = (TCliente)datos;
+		SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
+		if(infoCliente.consulta(cliente.getId()) != null) {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_REGISTRO_DE_CLIENTE).actualizar(Evento.CLIENTE_YA_REGISTRADO, cliente.getId());
+		}
+		else {
+			infoCliente.alta(cliente);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_REGISTRO_DE_CLIENTE).actualizar(Evento.CLIENTE_REGISTRADO, cliente.getId());
+		}
+	}
 	
 		
 }
