@@ -120,6 +120,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//Botones
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.add(buttonsPanel);
 		
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener((e) ->{
@@ -164,8 +165,6 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		JButton cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener((e)-> setVisible(false));
 		
-		
-		
 		buttonsPanel.add(okButton);
 		buttonsPanel.add(cancelButton);
 		
@@ -175,7 +174,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		
 		pack();
 		setResizable(false);
-		
+		setLocationRelativeTo(null);
 	}
 	
 	@Override
