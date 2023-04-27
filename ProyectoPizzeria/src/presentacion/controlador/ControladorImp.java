@@ -320,8 +320,8 @@ public class ControladorImp extends Controlador { //implementacion
 	
 	private void buscarFactura(Object datos) {
 		SAFactura saFact = FactoriaAbstractaNegocio.getInstace().crearSAFactura();
-		TFactura tf = saFact.buscarFactura((String) datos);
-		if (tf != null) FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_OK, (String) datos);
+		TFactura tf = saFact.buscarFactura(datos.toString());
+		if (tf != null) FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_OK, tf);
 		else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_WR, tf);
 	}
 	
