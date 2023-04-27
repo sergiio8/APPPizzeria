@@ -4,15 +4,13 @@ public class TLineaFactura {
 	private String id;
 	private String id_factura;
 	private String id_producto;
-	private double precio_linea;
 	private int cantidad;
 	
-	public TLineaFactura(String Id, String IdFactura, String IdProducto, int Cantidad, double precio) {
+	public TLineaFactura(String Id, String IdFactura, String IdProducto, int Cantidad) {
 		id = Id;
 		id_factura = IdFactura;
 		id_producto = IdProducto;
 		cantidad = Cantidad;
-		precio_linea =  cantidad * precio;
 	}
 	
 	public String getId() {
@@ -29,10 +27,6 @@ public class TLineaFactura {
 	
 	public int getCantidad() {
 		return cantidad;
-	}
-	
-	public double getPrecio() {
-		return precio_linea;
 	}
 	
 	public void setId(String Id) {
@@ -52,9 +46,7 @@ public class TLineaFactura {
 		cantidad = Cantidad;
 	}
 	
-	public void setPrecio(double precio) {
-		this.precio_linea = precio;
-	}
+	
 	
 
 }

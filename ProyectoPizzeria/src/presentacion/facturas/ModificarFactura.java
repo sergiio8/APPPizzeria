@@ -29,7 +29,7 @@ import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.mesas.VistaAnadirMesa;
 
-public class ModificarFactura extends JDialog implements IGUI{
+/*public class ModificarFactura extends JDialog implements IGUI{
 	
 	JTextField text1;
 	JTextField text2;
@@ -38,7 +38,7 @@ public class ModificarFactura extends JDialog implements IGUI{
 	
 	public ModificarFactura(Frame parent) {
 		super(parent, true);
-		initGUI();
+		//initGUI();
 	}
 	
 	private void initGUI() {
@@ -160,4 +160,4 @@ public class ModificarFactura extends JDialog implements IGUI{
 		
 	}
 
-}
+}*/

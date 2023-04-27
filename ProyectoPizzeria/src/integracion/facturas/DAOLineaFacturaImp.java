@@ -27,7 +27,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
     }
 
     @Override
-    public boolean modificarLineaFactura(TLineaFactura linea) {
+    /*public boolean modificarLineaFactura(TLineaFactura linea) {
     	boolean res = true;
     	
 		
@@ -79,9 +79,9 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
 		return res;
         
     
-    }
+    }*/
 
-    @Override
+  
     public TLineaFactura buscarLineaFactura(String id) {
     	JSONArray ja = null;
 		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/LineasFactura.json"))){ 
@@ -101,7 +101,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
 		}
 		else {
 			try {
-				return new TLineaFactura(ja.getJSONObject(i).getString("id"), ja.getJSONObject(i).getString("id_factura"), ja.getJSONObject(i).getString("producto"), ja.getJSONObject(i).getInt("cantidad"), ja.getJSONObject(i).getDouble("precio"));
+				return new TLineaFactura(ja.getJSONObject(i).getString("id"), ja.getJSONObject(i).getString("id_factura"), ja.getJSONObject(i).getString("producto"), ja.getJSONObject(i).getInt("cantidad"));
 			}
 			catch(Exception e) {
 				return null;
@@ -121,7 +121,6 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
             jo.put("id", f.getId());
             jo.put("producto", f.getIdProducto());
             jo.put("cantidad", f.getCantidad());
-            jo.put("precio", f.getPrecio());
             ja.put(jo);
         }
         catch(IOException ie) {
@@ -158,7 +157,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura{
 
 		while(i < ja.length()) {
 			
-			resultado.add( new TLineaFactura(ja.getJSONObject(i).getString("id"), ja.getJSONObject(i).getString("id_factura"), ja.getJSONObject(i).getString("producto"), ja.getJSONObject(i).getInt("cantidad"), ja.getJSONObject(i).getDouble("precio")));
+			resultado.add( new TLineaFactura(ja.getJSONObject(i).getString("id"), ja.getJSONObject(i).getString("id_factura"), ja.getJSONObject(i).getString("producto"), ja.getJSONObject(i).getInt("cantidad")));
 			i++;
 		}
 		return resultado;

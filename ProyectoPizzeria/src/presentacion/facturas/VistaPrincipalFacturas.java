@@ -84,11 +84,11 @@ public class VistaPrincipalFacturas extends JFrame implements IGUI {
 		});
 		buttonsPanel.add(buscarButton);
 		
-		modificarButton = new JButton("Modificar factura");
+		/*modificarButton = new JButton("Modificar factura");
 		modificarButton.addActionListener((e)->{
 			Controlador.getInstance().accion(Evento.MODIFICAR_FACTURA_VISTA, null);
 		});
-		buttonsPanel.add(modificarButton);
+		buttonsPanel.add(modificarButton);*/
 		
 		volverButton = new JButton("Volver");
 		volverButton.addActionListener((e)->{
