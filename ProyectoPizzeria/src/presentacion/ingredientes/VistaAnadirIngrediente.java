@@ -78,7 +78,7 @@ public class VistaAnadirIngrediente extends JDialog implements IGUI{
 		try {
 			nombre=t1.getText();
 			if(nombre.equals("")||nombre.equals(null)) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("La Vicky es una zorra");
 			}
 			cantidad= Integer.parseInt(t2.getText());
 			if(cantidad<0) {
