@@ -132,15 +132,23 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 			String descripcion;
 			try {
 				id = idText.getText();
+				if(id == null || id.equals(""))
+					throw new IllegalArgumentException("El id no puede ser nulo");
 				nombre = nameText.getText();
+				if(nombre == null || nombre.equals(""))
+					throw new IllegalArgumentException("El plato debe tener nombre");
 				precio = Double.parseDouble(priceText.getText());
-				String[] aux = ingredientsText.getText().trim().split(",");
-				for(String s : aux)
-					ingredientes.add(s.trim());
-				descripcion = descriptionText.getText();
 				if(precio <= 0) {
 					throw new NumberFormatException();
 				}
+				String[] aux = ingredientsText.getText().trim().split(",");
+				if(aux == null)
+					throw new IllegalArgumentException("El plato debe tener ingredientes");
+				for(String s : aux)
+					ingredientes.add(s.trim());
+				descripcion = descriptionText.getText();
+				if(descripcion == null || descripcion.equals(""))
+					throw new IllegalArgumentException("El plato debe tener descripcion");
 				if(entranteButton.isSelected()) {
 					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TEntrante(id, nombre,precio,ingredientes,descripcion));
 				}
