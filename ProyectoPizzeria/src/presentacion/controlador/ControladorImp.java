@@ -83,13 +83,15 @@ public class ControladorImp extends Controlador { //implementacion
 			break;
         case ALTA_FACTURA_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA, null);
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.RESETEAR_VISTA_ANADIR, null);
 			break;
 		case BUSCAR_FACTURA_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA, null);
 			break;
 		case ANADIR_PRODUCTO_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ANADIR_PRODUCTO_VISTA).actualizar(Evento.ANADIR_PRODUCTO_VISTA, null);
+			break;
+		case ANADIR_PRODUCTO_VISTA_BIS:
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ANADIR_PRODUCTO_VISTA_BIS).actualizar(Evento.ANADIR_PRODUCTO_VISTA_BIS, null);
 			break;
 		case LISTAR_FACTURAS_VISTA:
 			Collection<TFactura> facts = listarFacturas();
