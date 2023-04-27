@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import negocio.ingredientes.TIngrediente;
 import negocio.producto.TEntrante;
 import negocio.producto.TPizza;
 import negocio.producto.TPostre;
@@ -45,7 +44,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		//ID
 		JPanel idPanel = new JPanel();
 		JLabel idLabel = new JLabel("ID_plato: ");
-		JTextField idText = new JTextField();
+		JTextField idText = new JTextField(10);
 		
 		idPanel.add(idLabel);
 		idPanel.add(idText);
@@ -55,7 +54,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		//Nombre
 		JPanel namePanel = new JPanel(new FlowLayout());
 		JLabel nameLabel = new JLabel("Nombre: ");
-		JTextField nameText = new JTextField();
+		JTextField nameText = new JTextField(10);
 		
 		namePanel.add(nameLabel);
 		namePanel.add(nameText);
@@ -65,7 +64,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		//Precio
 		JPanel pricePanel = new JPanel(new FlowLayout());
 		JLabel priceLabel = new JLabel("Precio: ");
-		JTextField priceText = new JTextField();
+		JTextField priceText = new JTextField(10);
 		
 		pricePanel.add(priceLabel);
 		pricePanel.add(priceText);
@@ -75,9 +74,9 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		//Ingredientes
 		JPanel ingredientsPanel = new JPanel(new FlowLayout());
 		JLabel ingredientsLabel = new JLabel("Ingredientes: ");
-		JTextField ingredientsText = new JTextField();
+		JTextField ingredientsText = new JTextField(25);
 		
-		pricePanel.add(ingredientsLabel);
+		ingredientsPanel.add(ingredientsLabel);
 		ingredientsPanel.add(ingredientsText);
 		
 		contenedor.add(ingredientsPanel);
@@ -85,7 +84,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		//Descripcion
 		JPanel descriptionPanel= new JPanel(new FlowLayout());
 		JLabel descriptionLabel = new JLabel("Descripcion: ");
-		JTextField descriptionText = new JTextField();
+		JTextField descriptionText = new JTextField(30);
 		
 		descriptionPanel.add(descriptionLabel);
 		descriptionPanel.add(descriptionText);
@@ -123,7 +122,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 			String id;
 			String nombre;
 			double precio;
-			ArrayList<TIngrediente> ingredientes = new ArrayList<TIngrediente>();
+			ArrayList<String> ingredientes = new ArrayList<String>();
 			String descripcion;
 			try {
 				id = idText.getText();
@@ -131,7 +130,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 				precio = Double.parseDouble(priceText.getText());
 				String[] aux = ingredientsText.getText().trim().split(",");
 				for(String s : aux)
-					ingredientes.add(new TIngrediente(s.trim()));
+					ingredientes.add(s.trim());
 				descripcion = descriptionText.getText();
 				if(precio <= 0) {
 					throw new NumberFormatException();

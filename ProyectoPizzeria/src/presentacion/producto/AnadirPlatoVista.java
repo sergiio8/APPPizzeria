@@ -18,7 +18,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import negocio.ingredientes.TIngrediente;
+import negocio.producto.TEntrante;
+import negocio.producto.TPizza;
 import negocio.producto.TPlato;
+import negocio.producto.TPostre;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
@@ -44,7 +47,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//ID
 		JPanel idPanel = new JPanel();
 		JLabel idLabel = new JLabel("ID_plato: ");
-		JTextField idText = new JTextField();
+		JTextField idText = new JTextField(10);
 		
 		idPanel.add(idLabel);
 		idPanel.add(idText);
@@ -54,7 +57,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//Nombre
 		JPanel namePanel = new JPanel(new FlowLayout());
 		JLabel nameLabel = new JLabel("Nombre: ");
-		JTextField nameText = new JTextField();
+		JTextField nameText = new JTextField(10);
 		
 		namePanel.add(nameLabel);
 		namePanel.add(nameText);
@@ -64,7 +67,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//Precio
 		JPanel pricePanel = new JPanel(new FlowLayout());
 		JLabel priceLabel = new JLabel("Precio: ");
-		JTextField priceText = new JTextField();
+		JTextField priceText = new JTextField(10);
 		
 		pricePanel.add(priceLabel);
 		pricePanel.add(priceText);
@@ -74,9 +77,9 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//Ingredientes
 		JPanel ingredientsPanel = new JPanel(new FlowLayout());
 		JLabel ingredientsLabel = new JLabel("Ingredientes: ");
-		JTextField ingredientsText = new JTextField();
+		JTextField ingredientsText = new JTextField(25);
 		
-		pricePanel.add(ingredientsLabel);
+		ingredientsPanel.add(ingredientsLabel);
 		ingredientsPanel.add(ingredientsText);
 		
 		contenedor.add(ingredientsPanel);
@@ -84,7 +87,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		//Descripcion
 		JPanel descriptionPanel= new JPanel(new FlowLayout());
 		JLabel descriptionLabel = new JLabel("Descripcion: ");
-		JTextField descriptionText = new JTextField();
+		JTextField descriptionText = new JTextField(30);
 		
 		descriptionPanel.add(descriptionLabel);
 		descriptionPanel.add(descriptionText);
@@ -101,6 +104,9 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		JRadioButton pizzaButton = new JRadioButton("Pizza");
 		JRadioButton postreButton = new JRadioButton("Postre");
 		ButtonGroup bGroup = new ButtonGroup();
+		bGroup.add(entranteButton);
+		bGroup.add(pizzaButton);
+		bGroup.add(postreButton);
 		
 		typeButtonPanel.add(entranteButton);
 		typeButtonPanel.add(pizzaButton);
@@ -122,7 +128,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 			String id;
 			String nombre;
 			double precio;
-			ArrayList<TIngrediente> ingredientes = new ArrayList<TIngrediente>();
+			ArrayList<String> ingredientes = new ArrayList<String>();
 			String descripcion;
 			try {
 				id = idText.getText();
@@ -130,19 +136,19 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 				precio = Double.parseDouble(priceText.getText());
 				String[] aux = ingredientsText.getText().trim().split(",");
 				for(String s : aux)
-					ingredientes.add(new TIngrediente(s.trim()));
+					ingredientes.add(s.trim());
 				descripcion = descriptionText.getText();
 				if(precio <= 0) {
 					throw new NumberFormatException();
 				}
 				if(entranteButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPlato(id,"Entrante", nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TEntrante(id, nombre,precio,ingredientes,descripcion));
 				}
 				else if(pizzaButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPlato(id,"Pizza", nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPizza(id, nombre,precio,ingredientes,descripcion));
 				}
 				else if(postreButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPlato(id,"Postre", nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPostre(id, nombre,precio,ingredientes,descripcion));
 				}
 				else {
 					throw new IllegalArgumentException();
