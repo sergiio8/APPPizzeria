@@ -180,6 +180,10 @@ public class ControladorImp extends Controlador { //implementacion
         case MODIFICAR_INGREDIENTE:
             modificarIngrediente(datos);
             break;
+        case LISTAR_INGREDIENTE_VISTA:
+        	Collection<TIngrediente> c= listarIngredientes();
+        	FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_INGREDIENTE_VISTA).actualizar(Evento.LISTAR_INGREDIENTE_VISTA,c);
+        	break;
 	}
 }
 	private void altaIngrediente(Object datos) {
@@ -363,6 +367,12 @@ public class ControladorImp extends Controlador { //implementacion
 			infoCliente.alta(cliente);
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_REGISTRO_DE_CLIENTE).actualizar(Evento.CLIENTE_REGISTRADO, cliente.getId());
 		}
+	}
+	private Collection<TIngrediente> listarIngredientes(){
+		SAIngrediente ingrediente= FactoriaAbstractaNegocio.getInstace().crearSAIngrediente();
+		Collection<TIngrediente> c= ingrediente.consultaTodos();
+		return c;
+		
 	}
 	
 		
