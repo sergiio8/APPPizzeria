@@ -82,7 +82,7 @@ public class BuscarFactura extends JDialog implements IGUI{
 		String ID_factura = null;
 		try {
 			ID_factura = text1.getText();
-			if (ID_factura == null) {
+			if (ID_factura == "") {
 				throw new IllegalArgumentException();
 			}
 			Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, ID_factura);
