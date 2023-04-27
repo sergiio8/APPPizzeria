@@ -140,7 +140,5 @@ public class CerrarVenta extends JDialog implements IGUI{
 			setVisible(false);
 			break;
 		}
-		
 	}
-
 }
