@@ -48,7 +48,7 @@ public class AnadirProducto extends JDialog implements IGUI{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		setContentPane(mainPanel);
-		setPreferredSize(new Dimension(400,400));
+		setPreferredSize(new Dimension(450,450));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		Box contenedor = Box.createVerticalBox();
 		
@@ -169,6 +169,7 @@ public class AnadirProducto extends JDialog implements IGUI{
 			JOptionPane.showMessageDialog(this,"Producto anadido correctamente con ID: " + datos.toString() ,"Producto anadido correctamente con ID: " + datos.toString(), JOptionPane.INFORMATION_MESSAGE);
 			text2.setText(null);
 			text3.setText(null);
+			cant.setValue(0);
 			setVisible(false);
 			productos_panel.add(new JLabel("ID: " + datos.toString() + ", cantidad: " + Integer.parseInt(cant.getValue().toString())));
 			break;
@@ -176,7 +177,17 @@ public class AnadirProducto extends JDialog implements IGUI{
 			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
 			setVisible(false);
 			break;
+		case RESETEAR_VISTA_ANADIR:
+			text1.setText(null);
+			text2.setText(null);
+			text3.setText(null);
+			productos_panel.removeAll();
+			productos_panel.add(new JLabel("Productos añadidos hasta el momento en la factura con ID: "));
+			setVisible(false);
+			
 		}
+		
+			
 		
 	}
 
