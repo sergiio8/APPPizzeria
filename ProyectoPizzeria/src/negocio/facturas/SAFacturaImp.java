@@ -22,7 +22,7 @@ public class SAFacturaImp implements SAFactura{
 
     @Override
     public boolean crearFactura(TDatosVenta datos) {
-        boolean valida = true;
+        boolean valida = false;
         DAOFactura daof = FactoriaAbstractaIntegracion.getInstace().crearDAOFactura();
         DAOClientes daoc = FactoriaAbstractaIntegracion.getInstace().crearDAOCliente();
         DAOPlato daop = FactoriaAbstractaIntegracion.getInstace().crearDAOPlato();
@@ -60,8 +60,9 @@ public class SAFacturaImp implements SAFactura{
                 daof.crearFactura(fact);
                 valida = true;
             }
-            else valida = false;
+            else return false;
         }
+        else return false;
         
         return valida;
         
