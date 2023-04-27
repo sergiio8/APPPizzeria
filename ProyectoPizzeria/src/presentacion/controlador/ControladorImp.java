@@ -309,7 +309,6 @@ public class ControladorImp extends Controlador { //implementacion
         boolean sol = saFact.crearFactura(dt);
         if (sol) {
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA_OK, dt.getid_factura());
-			
 	    }
         else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA_WR, dt.getProductos().size());
 	}
