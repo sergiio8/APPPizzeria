@@ -110,7 +110,7 @@ public class DAOPlatoImp implements DAOPlato {
 			
 			String tipo = obj.getString("tipo").toLowerCase();
 			String nombre = obj.getString("nombre");
-			Double precio = Double.parseDouble(obj.getString("precio"));
+			Double precio = obj.getDouble("precio");
 			ArrayList<String> ingredientes = new ArrayList<String>();
 			String[] aux = obj.getString("ingredientes").trim().split(",");
 			for(String s : aux)
