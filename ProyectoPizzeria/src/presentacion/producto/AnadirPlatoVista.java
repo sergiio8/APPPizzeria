@@ -142,7 +142,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 					throw new NumberFormatException();
 				}
 				String[] aux = ingredientsText.getText().trim().split(",");
-				if(aux == null)
+				if(aux == null || aux[0].equals(""))
 					throw new IllegalArgumentException("El plato debe tener ingredientes");
 				for(String s : aux)
 					ingredientes.add(s.trim());
@@ -159,14 +159,14 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPostre(id, nombre,precio,ingredientes,descripcion));
 				}
 				else {
-					throw new IllegalArgumentException();
+					throw new IllegalArgumentException("Indique el tipo del plato");
 				}				
 			}
 			catch(NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(AnadirPlatoVista.this, "ERROR: El precio del plato debe ser un numero positivo", "ERROR: El precio del plato debe ser un numero positivo", JOptionPane.ERROR_MESSAGE);
 			}
 			catch(IllegalArgumentException iae) {
-				JOptionPane.showMessageDialog(AnadirPlatoVista.this, "ERROR: Seleccione tipo de plato", "ERROR: Seleccione tipo de plato", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(AnadirPlatoVista.this, "ERROR: " + iae.getMessage(), "ERROR: "+iae.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		

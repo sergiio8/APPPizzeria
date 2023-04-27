@@ -43,7 +43,7 @@ public class DAOPlatoImp implements DAOPlato {
 			ja.put(jo);
 		}
 		catch(Exception e1) {
-			id = "";
+			id = "hola";
 		}
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter("ProyectoPizzeria/resources/Platos.json", false))){
 			JSONObject jo2 = new JSONObject();
