@@ -53,12 +53,21 @@ public class MainWindow extends JFrame implements IGUI{
 		buttonsPanel.add(mesasButton);
 		
 		clientesButton = new JButton("Subsistema Clientes");
+		clientesButton.addActionListener((e) -> {
+			Controlador.getInstance().accion(Evento.VISTA_PRINCIPAL_CLIENTES, null);
+		});
 		buttonsPanel.add(clientesButton);
 		
 		platosButton = new JButton("Subsistema Platos");
+		platosButton.addActionListener((e) -> {
+			Controlador.getInstance().accion(Evento.VISTA_PRINCIPAL_PLATO, null);
+		});
 		buttonsPanel.add(platosButton);
 		
 		ingredientesButton = new JButton("Subsistema Ingredientes");
+		ingredientesButton.addActionListener((e) -> {
+			Controlador.getInstance().accion(Evento.VISTA_PRINCIPAL_INGREDIENTE, null);
+		});
 		buttonsPanel.add(ingredientesButton);
 		
 		facturasButton = new JButton("Subsistema Facturas");

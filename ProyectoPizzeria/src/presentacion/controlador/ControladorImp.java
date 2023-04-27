@@ -84,9 +84,6 @@ public class ControladorImp extends Controlador { //implementacion
         case ALTA_FACTURA_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA, null);
 			break;
-		case MODIFICAR_FACTURA_VISTA:
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_FACTURA_VISTA).actualizar(Evento.MODIFICAR_FACTURA_VISTA, null);
-			break;
 		case BUSCAR_FACTURA_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA, null);
 			break;
@@ -101,9 +98,6 @@ public class ControladorImp extends Controlador { //implementacion
             break;
 		case BUSCAR_FACTURA:
 			buscarFactura(datos);
-			break;
-		case MODIFICAR_FACTURA:
-			modificarFactura(datos);
 			break;
 		case LISTAR_FACTURAS:
 			listarFacturas(datos);
@@ -124,7 +118,9 @@ public class ControladorImp extends Controlador { //implementacion
 		case REGISTRO_DE_CLIENTE:
 			registroCliente(datos);
 			break;
-			
+		case VISTA_PRINCIPAL_PLATO:
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_PRINCIPAL_PLATO);
+			break;
 		case ALTA_PLATO_VISTA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_VISTA, null);
 			break;
@@ -307,14 +303,6 @@ public class ControladorImp extends Controlador { //implementacion
 		TFactura tf = saFact.buscarFactura((String) datos);
 		if (tf != null) FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_OK, (String) datos);
 		else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_FACTURA_VISTA).actualizar(Evento.BUSCAR_FACTURA_VISTA_WR, tf);
-	}
-	
-	private void modificarFactura(Object datos) {
-		SAFactura saFact = FactoriaAbstractaNegocio.getInstace().crearSAFactura();
-		TLineaFactura linea = (TLineaFactura) datos;
-		boolean sol3 = saFact.modificarFactura(linea);
-		if (sol3) FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_FACTURA_VISTA).actualizar(Evento.MODIFICAR_FACTURA_VISTA_OK, linea.getIdFactura());
-		else FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_FACTURA_VISTA).actualizar(Evento.MODIFICAR_FACTURA_VISTA_WR, sol3);
 	}
 	
 	private Collection<TFactura> listarFacturas(Object datos) {

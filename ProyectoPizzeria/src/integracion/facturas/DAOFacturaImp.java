@@ -32,7 +32,7 @@ public class DAOFacturaImp implements DAOFactura {
     }
     
     
-    public boolean modificarFactura(TLineaFactura l) {
+    /*public boolean modificarFactura(TLineaFactura l) {
     	boolean res = true;
     	
 		
@@ -81,7 +81,7 @@ public class DAOFacturaImp implements DAOFactura {
         
         
         
-    }
+    }*/
     
     public TFactura buscarFactura(String id) {
     	JSONArray ja = null;

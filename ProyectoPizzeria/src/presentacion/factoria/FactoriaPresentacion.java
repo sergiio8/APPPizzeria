@@ -14,12 +14,12 @@ import presentacion.mesas.VistaBuscarMesa;
 import presentacion.mesas.VistaListarMesas;
 import presentacion.mesas.VistaModificarMesa;
 import presentacion.mesas.VistaPrincipalMesas;
+import presentacion.producto.VistaPrincipalPlatos;
 import presentacion.clientes.*;
 import presentacion.facturas.AnadirProducto;
 import presentacion.facturas.BuscarFactura;
 import presentacion.facturas.CerrarVenta;
 import presentacion.facturas.ListarFacturas;
-import presentacion.facturas.ModificarFactura;
 import presentacion.facturas.VistaPrincipalFacturas;
 import presentacion.ingredientes.VistaAnadirIngrediente;
 import presentacion.ingredientes.VistaEliminar;
@@ -41,13 +41,13 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaRegistrarCliente = null;
 	private IGUI vistaPrincipalFactura = null;
 	private IGUI vistaAltaFactura = null;
-	private IGUI vistaModificarFactura = null;
 	private IGUI vistaBuscarFactura = null;
 	private IGUI vistaAnadirProducto = null;
 	private IGUI vistaListarFacturas = null;
 	private IGUI vistaEliminarIngrediente = null;
 	private IGUI vistaAnadirIngrediente = null;
 	private IGUI vistaModificarIngrediente = null;
+	private IGUI vistaPrincipalPlato = null;
 
 	@Override
 	public IGUI createVista(Evento e) {
@@ -105,11 +105,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaBuscarFactura = new BuscarFactura((Frame) vistaPrincipalFactura);
 			}
 			return vistaBuscarFactura;
-		case MODIFICAR_FACTURA_VISTA:
-			if (vistaModificarFactura == null) {
-				vistaModificarFactura = new ModificarFactura((Frame) vistaPrincipalFactura);
-			}
-			return vistaModificarFactura;
 		case LISTAR_FACTURAS_VISTA:
 			if (vistaListarFacturas == null) {
 				vistaListarFacturas = new ListarFacturas((Frame) vistaPrincipalFactura);
@@ -132,6 +127,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			if(vistaModificarIngrediente == null) {
 				vistaModificarIngrediente = new VistaModificarIngrediente();
 			}
+		case VISTA_PRINCIPAL_PLATO:
+			this.vistaPrincipalPlato = new VistaPrincipalPlatos();
+			return vistaPrincipalPlato;
+			
 		default:
 			return null;
 		}
