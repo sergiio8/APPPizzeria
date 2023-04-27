@@ -128,6 +128,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaAnadirProducto = new AnadirProducto((Frame) vistaPrincipalFactura);
 			}
 			return vistaAnadirProducto;
+		case ANADIR_PRODUCTO_VISTA_BIS:
+			if (vistaAnadirProducto == null) {
+				vistaAnadirProducto = new AnadirProducto((Frame) vistaPrincipalFactura);
+			}
+			return vistaAnadirProducto;
 		case BAJA_INGREDIENTE_VISTA:
 			if(vistaEliminarIngrediente == null) {
 				vistaEliminarIngrediente = new VistaEliminar();

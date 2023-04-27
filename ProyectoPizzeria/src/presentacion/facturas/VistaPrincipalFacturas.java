@@ -30,6 +30,7 @@ public class VistaPrincipalFacturas extends JFrame implements IGUI {
 	private JButton modificarButton;
 	private JButton volverButton;
 	private JButton anadirButton;
+	private boolean first = true;
 
 	public VistaPrincipalFacturas() {
 		super("Facturas");
@@ -53,6 +54,7 @@ public class VistaPrincipalFacturas extends JFrame implements IGUI {
 		abrirButton.addActionListener((e) -> {
 			Controlador.getInstance().accion(Evento.ABRIR_VENTA, null);
 			esta_abierta.setText("Factura en proceso");
+			
 		});
 		buttonsPanel.add(abrirButton);
 		
@@ -61,8 +63,13 @@ public class VistaPrincipalFacturas extends JFrame implements IGUI {
 		
 		anadirButton = new JButton("Añadir producto a factura");
 		anadirButton.addActionListener((e) -> {
-			if (esta_abierta.getText().equals("Factura en proceso"))
-			Controlador.getInstance().accion(Evento.ANADIR_PRODUCTO_VISTA, null);
+			if (esta_abierta.getText().equals("Factura en proceso")) {
+				if (first) {
+					first = false;
+					Controlador.getInstance().accion(Evento.ANADIR_PRODUCTO_VISTA_BIS, null);
+				}
+				else Controlador.getInstance().accion(Evento.ANADIR_PRODUCTO_VISTA, null);
+			}
 			else JOptionPane.showMessageDialog(this,"ERROR: Debe abrir una venta antes de añadir productos","ERROR" , JOptionPane.INFORMATION_MESSAGE);
 		});
 		buttonsPanel.add(anadirButton);
@@ -72,6 +79,7 @@ public class VistaPrincipalFacturas extends JFrame implements IGUI {
 		altaButton.addActionListener((e)->{
 			Controlador.getInstance().accion(Evento.ALTA_FACTURA_VISTA, null);
 			esta_abierta.setText("Factura cerrada");
+			first = true;
 		});
 		buttonsPanel.add(altaButton);
 		
