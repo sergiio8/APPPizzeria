@@ -134,9 +134,6 @@ public class DAOFacturaImp implements DAOFactura {
             JSONArray lines = new JSONArray();
             int i = 0;
             DAOLineaFactura daol = FactoriaAbstractaIntegracion.getInstace().crearDAOLineaFactura();
-            for (TLineaFactura t : fact.getProductos()) {
-                daol.crearLineaFactura(t);
-            }
             jo.put("id_cliente", fact.getIdCliente());
             jo.put("id_vendedor", fact.getIdVendedor());
             if (fact.getActivo()) jo.put("activa", "true");

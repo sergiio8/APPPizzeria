@@ -32,7 +32,7 @@ public class SAFacturaImp implements SAFactura{
         int precio_total = 0;
         String id = null;
         
-        if (daoc.obtenCliente(datos.getid_cliente()) != null) {
+        if (daoc.obtenCliente(datos.getid_cliente()) != null || true) {
             for (TLineaFactura f : datos.getProductos()) {
                 TPlato plato = daop.obtenPlato(f.getIdProducto());
                 if (plato != null) {
@@ -45,6 +45,7 @@ public class SAFacturaImp implements SAFactura{
                         daol.crearLineaFactura(f);
                     }
                     else if (plato.getStock() > 0){
+                    	valida = true;
                         f.setCantidad(plato.getStock());
                         plato.setStock(0);
                         id = f.getIdFactura();
