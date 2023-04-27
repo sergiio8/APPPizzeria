@@ -28,6 +28,7 @@ import presentacion.facturas.ListarFacturas;
 import presentacion.facturas.VistaPrincipalFacturas;
 import presentacion.ingredientes.VistaAnadirIngrediente;
 import presentacion.ingredientes.VistaEliminar;
+import presentacion.ingredientes.VistaListarIngredientes;
 import presentacion.ingredientes.VistaMainIngredientes;
 import presentacion.ingredientes.VistaModificarIngrediente;
 
@@ -59,6 +60,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaBorrarPlato = null;
 	private IGUI vistaModificarPlato = null;
 	private IGUI vistaBuscarPlato = null;
+	private IGUI vistaListarIngredientes= null;
 
 	@Override
 	public IGUI createVista(Evento e) {
@@ -164,6 +166,9 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			return vistaBuscarPlato;
 		case LISTAR_PLATOS:
 			return new VistaListarPlatos((Frame) vistaPrincipalPlato);
+		case LISTAR_INGREDIENTE_VISTA:
+			this.vistaListarIngredientes= new VistaListarIngredientes();
+			return vistaListarIngredientes;
 		default:
 			return null;
 		}
