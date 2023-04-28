@@ -29,6 +29,7 @@ public class CerrarVenta extends JDialog implements IGUI{
 	JTextField text2;
 	JTextField text3;
 	JTextField text4;
+	String ID;
 	
 	public CerrarVenta(Frame parent) {
 		super(parent, true);
@@ -47,6 +48,8 @@ public class CerrarVenta extends JDialog implements IGUI{
 		JPanel panel1 = new JPanel(new FlowLayout());
 		JLabel ID_factura = new JLabel("ID_factura: ");
 		text1 = new JTextField(10);
+		text1.setText(ID);
+		text1.setEnabled(false);
 		
 		panel1.add(ID_factura);
 		panel1.add(text1);
