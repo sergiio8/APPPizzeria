@@ -83,11 +83,11 @@ public class EliminarPlatoVista extends JDialog implements IGUI{
 			setVisible(true);
 			break;
 		case BAJA_PLATO_OK:
-			JOptionPane.showMessageDialog(this, "Plato borrado correctamente", "Plato borrado correctamente", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Baja Plato", "Plato borrado correctamente", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
 			break;
 		case BAJA_PLATO_KO:
-			JOptionPane.showMessageDialog(this, "ERROR: NO SE HA PODIDO BORRAR EL PLATO", "ERROR: NO SE HA PODIDO BORRAR EL PLATO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "ERROR: NO SE HA PODIDO BORRAR EL PLATO", "ERROR: NO SE HA ENCONTRADO EL PLATO", JOptionPane.ERROR_MESSAGE);
 			setVisible(false);
 			break;
 		}
