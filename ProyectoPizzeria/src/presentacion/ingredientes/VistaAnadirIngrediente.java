@@ -94,7 +94,7 @@ public class VistaAnadirIngrediente extends JDialog implements IGUI{
 		String[]platos;
 		try {
 			nombre=t1.getText();
-			if(nombre.equals("")||nombre.equals(null)) {
+			if(nombre.equals("")) {
 				throw new IllegalArgumentException("Alejandro matricula YA");
 			}
 			cantidad= Integer.parseInt(t2.getText());
