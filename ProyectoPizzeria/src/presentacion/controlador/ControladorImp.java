@@ -279,7 +279,7 @@ public class ControladorImp extends Controlador { //implementacion
 		
 		boolean resultado = saPlato.modificar(tp);
 		
-		if(resultado == true) {
+		if(resultado) {
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.MODIFICAR_PLATO_VISTA).actualizar(Evento.MODIFICAR_PLATO_OK, resultado);
 		}
 		else {
