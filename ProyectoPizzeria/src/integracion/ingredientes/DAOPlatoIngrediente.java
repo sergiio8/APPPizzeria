@@ -1,5 +1,6 @@
 package integracion.ingredientes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface DAOPlatoIngrediente {
 	boolean daDeBajaPlato (String id);
 	boolean modificaPlato(TPlato plato);
 	TPlatoIngrediente cogerPlato(String id);
+	ArrayList<String> cogerIngredientes(String plato);
 }

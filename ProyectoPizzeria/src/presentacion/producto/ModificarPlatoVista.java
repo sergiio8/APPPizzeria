@@ -61,16 +61,6 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		
 		contenedor.add(pricePanel);
 		
-		//Ingredientes
-		JPanel ingredientsPanel = new JPanel(new FlowLayout());
-		JLabel ingredientsLabel = new JLabel("Ingredientes: ");
-		JTextField ingredientsText = new JTextField(25);
-		
-		ingredientsPanel.add(ingredientsLabel);
-		ingredientsPanel.add(ingredientsText);
-		
-		contenedor.add(ingredientsPanel);
-
 		//Descripcion
 		JPanel descriptionPanel= new JPanel(new FlowLayout());
 		JLabel descriptionLabel = new JLabel("Descripcion: ");
@@ -90,25 +80,20 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 		okButton.addActionListener((e) ->{
 			String nombre;
 			double precio;
-			ArrayList<String> ingredientes = new ArrayList<String>();
 			String descripcion;
 			try {
 				nombre = nameText.getText();
 				if(!priceText.getText().equals(""))
 					precio = Double.parseDouble(priceText.getText());
 				else precio = 0;
-				String[] aux = ingredientsText.getText().trim().split(",");
-				for(String s : aux)
-					ingredientes.add(s.trim());
+				if(precio < 0)
+					throw new NumberFormatException();
 				descripcion = descriptionText.getText();
 				
-				Controlador.getInstance().accion(Evento.MODIFICAR_PLATO, new TEntrante(nombre,precio,ingredientes,descripcion));			
+				Controlador.getInstance().accion(Evento.MODIFICAR_PLATO, new TEntrante(nombre,precio,descripcion));			
 			}
 			catch(NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(ModificarPlatoVista.this, "ERROR: El precio del plato debe ser un numero positivo", "ERROR: El precio del plato debe ser un numero positivo", JOptionPane.ERROR_MESSAGE);
-			}
-			catch(IllegalArgumentException iae) {
-				JOptionPane.showMessageDialog(ModificarPlatoVista.this, "ERROR: Seleccione tipo de plato", "ERROR: Seleccione tipo de plato", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -135,7 +120,7 @@ public class ModificarPlatoVista extends JDialog implements IGUI {
 			setVisible(true);
 			break;
 		case MODIFICAR_PLATO_OK:
-			JOptionPane.showMessageDialog(this, "Plato modificado", "Plato con id: modificado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Plato modificado", "Plato modificado", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
 			break;
 		case MODIFICAR_PLATO_KO:

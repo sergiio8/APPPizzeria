@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.swing.table.AbstractTableModel;
 
+import negocio.ingredientes.Pair;
 import negocio.producto.TPlato;
 
 public class ModeloTablaPlato extends AbstractTableModel {
@@ -12,15 +13,15 @@ public class ModeloTablaPlato extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	
 	private String[] header = {"Nombre", "Tipo", "Precio", "Ingredientes", "Descripcion"};
-	private ArrayList<TPlato> platos;
+	private ArrayList<Pair<TPlato,ArrayList<String>>> datos;
 	
 	@Override
 	public int getRowCount() {
-		if(platos == null) {
+		if(datos == null) {
 			return 0;
 		}
 		else {
-			return platos.size();
+			return datos.size();
 		}
 	}
 
@@ -42,28 +43,28 @@ public class ModeloTablaPlato extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if(columnIndex == 0) {
-			return platos.get(rowIndex).getNombre();
+			return datos.get(rowIndex).getFirst().getNombre();
 		}
 		else if (columnIndex == 1) {
-			return platos.get(rowIndex).getTipo();
+			return datos.get(rowIndex).getFirst().getTipo();
 		}
 		else if (columnIndex == 2) {
-			return platos.get(rowIndex).getPrecio();
+			return datos.get(rowIndex).getFirst().getPrecio();
 		}
 		else if (columnIndex == 3) {
 			String ingredientes = "";
-			ArrayList<String> ing = platos.get(rowIndex).getIngredientes();
+			ArrayList<String> ing = datos.get(rowIndex).getSecond();
 			int i;
 			for(i = 0; i < ing.size()-1; ++i)
 				ingredientes += ing.get(i) + ", ";
 			ingredientes += ing.get(i) + '"';
 			return ingredientes;
 		}
-		else return platos.get(rowIndex).getDescripcion();
+		else return datos.get(rowIndex).getFirst().getDescripcion();
 	}
 	
 	public void update(Object datos) {
-		platos = new ArrayList<TPlato>((Collection<TPlato>)datos);
+		this.datos = (ArrayList<Pair<TPlato,ArrayList<String>>>)datos;
 		fireTableStructureChanged();
 	}
 

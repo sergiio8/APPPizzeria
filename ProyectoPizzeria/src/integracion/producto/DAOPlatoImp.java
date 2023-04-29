@@ -37,7 +37,6 @@ public class DAOPlatoImp implements DAOPlato {
 			for(i = 0;i<lista.size()-1;++i)
 				aux+=lista.get(i)+", ";
 			aux+=lista.get(i);*/
-			jo.put("ingredientes", tp.getIngredientes());
 			jo.put("descripcion", tp.getDescripcion());
 			ja.put(jo);
 		}
@@ -48,7 +47,6 @@ public class DAOPlatoImp implements DAOPlato {
 			JSONObject jo2 = new JSONObject();
 			jo2.put("ListaPlatos", ja);
 			bw.write(jo2.toString());
-			
 		} 
 		catch(Exception e2) {
 			nombre = "";
@@ -108,19 +106,21 @@ public class DAOPlatoImp implements DAOPlato {
 			JSONObject obj = ja.getJSONObject(i);
 			String tipo = obj.getString("tipo").toLowerCase();
 			Double precio = obj.getDouble("precio");
+			/*
 			ArrayList<String> ingredientes =  new ArrayList<String>();
 			Object o = obj.get("ingredientes");
 			String[] aux = o.toString().substring(1,o.toString().length()-2).trim().split(",");
 			for(String s : aux)
 				ingredientes.add(s.trim());
+				*/
 			String descripcion = obj.getString("descripcion");
 			
 			if(tipo.equals("entrante"))
-					return new TEntrante(nombre,precio,ingredientes,descripcion);
+					return new TEntrante(nombre,precio,descripcion);
 			else if(tipo.equals("pizza"))
-				return new TPizza(nombre,precio,ingredientes,descripcion);
+				return new TPizza(nombre,precio,descripcion);
 			else if(tipo.equals("postre"))
-				return new TPostre(nombre,precio,ingredientes,descripcion);
+				return new TPostre(nombre,precio,descripcion);
 			else return null;
 		}
 	}
@@ -152,10 +152,6 @@ public class DAOPlatoImp implements DAOPlato {
 		if (tp.getPrecio() != 0) {
 			jo.remove("precio");
 			jo.put("precio", tp.getPrecio());
-		}
-		if (!tp.getIngredientes().get(0).equals("")) {
-			jo.remove("ingredientes");
-			jo.put("ingredientes", tp.getIngredientes());
 		}
 		if (!tp.getDescripcion().equals("")) {
 			jo.remove("descripcion");
@@ -195,19 +191,21 @@ public class DAOPlatoImp implements DAOPlato {
 			String nombre = obj.getString("nombre");
 			String tipo = obj.getString("tipo").toLowerCase();
 			Double precio = obj.getDouble("precio");
+			/*
 			ArrayList<String> ingredientes =  new ArrayList<String>();
 			Object o = obj.get("ingredientes");
 			String[] aux = o.toString().substring(1,o.toString().length()-2).trim().split(",");
 			for(String s : aux)
 				ingredientes.add(s.trim());
+				*/
 			String descripcion = obj.getString("descripcion");
 			
 			if(tipo.equals("entrante"))
-				resultado.add(new TEntrante(nombre,precio,ingredientes,descripcion));
+				resultado.add(new TEntrante(nombre,precio,descripcion));
 			else if(tipo.equals("pizza"))
-				resultado.add(new TPizza(nombre,precio,ingredientes,descripcion));
+				resultado.add(new TPizza(nombre,precio,descripcion));
 			else if(tipo.equals("postre"))
-				resultado.add(new TPostre(nombre,precio,ingredientes,descripcion));
+				resultado.add(new TPostre(nombre,precio,descripcion));
 			i++;
 		}
 		return resultado;
