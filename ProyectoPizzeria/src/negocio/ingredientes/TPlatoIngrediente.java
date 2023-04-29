@@ -4,9 +4,9 @@ public class TPlatoIngrediente {
 	private String nombrePlato;
 	private String nombreIngrediente;
 	
-	public TPlatoIngrediente(String id, String nombre) {
-		this.nombrePlato=id;
-		this.nombreIngrediente=nombre;
+	public TPlatoIngrediente(String plato, String ingrediente) {
+		this.nombrePlato=plato;
+		this.nombreIngrediente=ingrediente;
 	}
 	public String getnombrePlato() {
 		return this.nombrePlato;
@@ -16,11 +16,11 @@ public class TPlatoIngrediente {
 		return this.nombreIngrediente;
 	}
 	
-	public void setnombrePlato(String id) {
-		this.nombrePlato=id;
+	public void setnombrePlato(String plato) {
+		this.nombrePlato=plato;
 	}
 	
-	public void setnombreIngrediente(String nombre) {
-		this.nombreIngrediente=nombre;
+	public void setnombreIngrediente(String ingrediente) {
+		this.nombreIngrediente=ingrediente;
 	}
 }

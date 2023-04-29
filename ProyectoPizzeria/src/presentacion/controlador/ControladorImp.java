@@ -391,11 +391,21 @@ public class ControladorImp extends Controlador { //implementacion
 	}
 	
 	private void altaPlato(Object datos) {
-		TPlato tp = (TPlato) datos;
+		JSONObject obj = (JSONObject) datos;
+		SAIngrediente saIng = FactoriaAbstractaNegocio.getInstace().crearSAIngrediente();
+		ArrayList<String> ingredientes = new ArrayList<String>();
+		String[] aux = obj.getString("ingredientes").trim().split(",");
+		for(String s : aux) {
+			if(saIng.consulta(s.trim()) == null) {
+				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_KO, "Ingrediente: "+s+" no encontrado");
+				return;
+			}
+			ingredientes.add(s.trim());
+		}
+		
+		TPlato tp = (TPlato) obj.get("plato");
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
-		
-		String nombre = saPlato.alta(tp);
-		
+		String nombre = saPlato.alta((JSONObject)datos);
 		if(nombre == "") {
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_KO, nombre);
 		}
@@ -444,7 +454,12 @@ public class ControladorImp extends Controlador { //implementacion
 			ArrayList<String> ingredientes = saPlato.cogerIngredientes(nombre);
 			JSONObject jo = new JSONObject();
 			jo.put("plato", plato);
-			//jo.put("ingredientes", ingredientes);
+			String ing = "";
+			int i = 0;
+			while(i<ingredientes.size()-1)
+				ing += ingredientes.get(i++) + ", ";
+			ing += ingredientes.get(i);
+			jo.put("ingredientes", ing);
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_PLATO_VISTA).actualizar(Evento.BUSCAR_PLATO_OK, jo);
 		}
 	}

@@ -3,22 +3,30 @@ package negocio.producto;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.JSONObject;
+
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.ingredientes.DAOPlatoIngrediente;
 import integracion.producto.DAOPlato;
+import negocio.ingredientes.TPlatoIngrediente;
 
 public class SAPlatoImp implements SAPlato {
 
 	@Override
-	public String alta(TPlato tp) {
+	public String alta(JSONObject datos) {
 		String nombre = "";
 		
 		DAOPlato daoPlato = FactoriaAbstractaIntegracion.getInstace().crearDAOPlato();
 		
-		if(tp != null) {
-			TPlato plato = daoPlato.obtenPlato(tp.getNombre());
-			if(plato == null) {
-				nombre = daoPlato.insertaPlato(tp);
+		if(datos != null) {
+			TPlato plato = (TPlato)datos.get("plato");
+			if(daoPlato.obtenPlato(plato.getNombre()) == null) {
+				nombre = daoPlato.insertaPlato(plato);
+				DAOPlatoIngrediente daoPIng = FactoriaAbstractaIntegracion.getInstace().crearDAOPlatoIngrediente();
+				String[] aux = datos.getString("ingredientes").trim().split(",");
+				for(String s : aux) {
+					daoPIng.insertarPlatoIngrediente(new TPlatoIngrediente(plato.getNombre(), s.trim()));
+				}
 			}
 		}
 		

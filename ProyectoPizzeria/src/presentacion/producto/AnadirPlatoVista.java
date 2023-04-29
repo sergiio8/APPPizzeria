@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import org.json.JSONObject;
+
 import negocio.ingredientes.TIngrediente;
 import negocio.producto.TEntrante;
 import negocio.producto.TPizza;
@@ -63,17 +65,17 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		pricePanel.add(priceText);
 		
 		contenedor.add(pricePanel);
-		/*
+		
 		//Ingredientes
 		JPanel ingredientsPanel = new JPanel(new FlowLayout());
-		JLabel ingredientsLabel = new JLabel("Ingredientes: ");
+		JLabel ingredientsLabel = new JLabel("Ingredientes (ing1,..., ingN): ");
 		JTextField ingredientsText = new JTextField(25);
 		
 		ingredientsPanel.add(ingredientsLabel);
 		ingredientsPanel.add(ingredientsText);
 		
 		contenedor.add(ingredientsPanel);
-		 */
+		 
 		//Descripcion
 		JPanel descriptionPanel= new JPanel(new FlowLayout());
 		JLabel descriptionLabel = new JLabel("Descripcion: ");
@@ -117,7 +119,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		okButton.addActionListener((e) ->{
 			String nombre;
 			double precio;
-			ArrayList<String> ingredientes = new ArrayList<String>();
+			String ingredientes;
 			String descripcion;
 			try {
 				nombre = nameText.getText();
@@ -127,24 +129,26 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 				if(precio <= 0) {
 					throw new NumberFormatException();
 				}
-				/*
-				String[] aux = ingredientsText.getText().trim().split(",");
+				ingredientes = ingredientsText.getText();
+				String[] aux = ingredientes.trim().split(",");
 				if(aux == null || aux[0].equals(""))
 					throw new IllegalArgumentException("El plato debe tener ingredientes");
-				for(String s : aux)
-					ingredientes.add(s.trim());
-					*/
 				descripcion = descriptionText.getText();
+				JSONObject jo = new JSONObject();
+				jo.put("ingredientes", ingredientes);
 				if(descripcion == null || descripcion.equals(""))
 					throw new IllegalArgumentException("El plato debe tener descripcion");
 				if(entranteButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TEntrante(nombre,precio,descripcion));
+					jo.put("plato", new TEntrante(nombre,precio,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO,jo );
 				}
 				else if(pizzaButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPizza(nombre,precio,descripcion));
+					jo.put("plato", new TPizza(nombre,precio,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, jo);
 				}
 				else if(postreButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPostre(nombre,precio,descripcion));
+					jo.put("plato", new TPostre(nombre,precio,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, jo);
 				}
 				else {
 					throw new IllegalArgumentException("Indique el tipo del plato");
