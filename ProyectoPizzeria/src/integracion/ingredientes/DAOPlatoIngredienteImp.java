@@ -79,11 +79,12 @@ public class DAOPlatoIngredienteImp implements DAOPlatoIngrediente {
 	@Override
 	public boolean insertarPlatoIngrediente(TPlatoIngrediente platoIngrediente) {
 		JSONArray ja = null;
-		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/PlatoIngrediente.json"))){ //idea mandar excepciones y tratarlas en controlador
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/PlatoIngrediente.json"))){
 			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
 			ja = jsonInput.getJSONArray("ListaPlatoIngrediente");
+			if(esta(ja,platoIngrediente))
+				return false;
 			JSONObject jo = new JSONObject();
-			//NO SE COMO BUSCAR SI ESTABA YA PREVIAMENTE O NO
 			jo.put("nombrePlato", platoIngrediente.getnombrePlato());
 			jo.put("nombreIngrediente", platoIngrediente.getnombreIngrediente());
 			ja.put(jo);
@@ -108,6 +109,16 @@ public class DAOPlatoIngredienteImp implements DAOPlatoIngrediente {
 		
 		return true;
 		
+	}
+	
+	private boolean esta(JSONArray ja, TPlatoIngrediente pi) {
+		int i = 0;
+		while(i<ja.length()) {
+			JSONObject jo = ja.getJSONObject(i);
+			if(jo.get("nombrePlato").equals(pi.getnombrePlato()) && jo.get("nombreIngrediente").equals(pi.getnombreIngrediente()))
+				return true;
+		}
+		return false;
 	}
 
 	@Override

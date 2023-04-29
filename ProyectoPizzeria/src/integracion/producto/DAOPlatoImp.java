@@ -31,6 +31,7 @@ public class DAOPlatoImp implements DAOPlato {
 			jo.put("nombre", nombre);
 			jo.put("tipo", tp.getTipo());
 			jo.put("precio", tp.getPrecio());
+			
 			/*String aux = "";
 			int i;
 			ArrayList<String> lista = tp.getIngredientes();
