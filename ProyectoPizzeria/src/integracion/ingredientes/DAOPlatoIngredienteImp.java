@@ -144,7 +144,7 @@ public class DAOPlatoIngredienteImp implements DAOPlatoIngrediente {
 	@Override
 	public TPlatoIngrediente cogerIngrediente(String nombre) {
 		JSONArray ja = null;
-		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/PlatoIngrediente.json"))){ //idea mandar excepciones y tratarlas en controlador
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/PlatoIngrediente.json"))){
 			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
 			ja = jsonInput.getJSONArray("ListaPlatoIngrediente");
 		}

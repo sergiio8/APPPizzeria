@@ -25,7 +25,7 @@ public class EliminarPlatoVista extends JDialog implements IGUI{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JTextField idPlato;
+	private JTextField nameText;
 	private JButton okButton;
 	private JButton cancelButton;
 	
@@ -44,21 +44,21 @@ public class EliminarPlatoVista extends JDialog implements IGUI{
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		Box contenedor = Box.createVerticalBox();
 		
-		JPanel idPanel = new JPanel();
+		JPanel namePanel = new JPanel();
 		
-		idPanel.add(new JLabel("ID Plato: "));
-		idPlato = new JTextField(10);
-		idPanel.add(idPlato);
+		namePanel.add(new JLabel("ID Plato: "));
+		nameText = new JTextField(10);
+		namePanel.add(nameText);
 		
-		contenedor.add(idPanel);
+		contenedor.add(namePanel);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		okButton = new JButton("OK");
 		okButton.addActionListener((e) ->{
-			String id = idPlato.getText();
-			Controlador.getInstance().accion(Evento.BAJA_PLATO, id);
+			String nombre = nameText.getText();
+			Controlador.getInstance().accion(Evento.BAJA_PLATO, nombre);
 		});
 		
 		buttonPanel.add(okButton);
