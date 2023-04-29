@@ -54,7 +54,10 @@ public class SAPlatoImp implements SAPlato {
 	@Override
 	public Boolean borrar(String nombre) {
 		DAOPlato daoPlato = FactoriaAbstractaIntegracion.getInstace().crearDAOPlato();
-		return daoPlato.daDeBajaPlato(nombre);
+		DAOPlatoIngrediente daoPIng = FactoriaAbstractaIntegracion.getInstace().crearDAOPlatoIngrediente();
+		boolean b = daoPlato.daDeBajaPlato(nombre);
+		daoPIng.daDeBajaPlato(nombre);
+		return b;
 	}
 
 	@Override

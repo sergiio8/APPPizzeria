@@ -398,14 +398,12 @@ public class ControladorImp extends Controlador { //implementacion
 	private void altaPlato(Object datos) {
 		JSONObject obj = (JSONObject) datos;
 		SAIngrediente saIng = FactoriaAbstractaNegocio.getInstace().crearSAIngrediente();
-		ArrayList<String> ingredientes = new ArrayList<String>();
 		String[] aux = obj.getString("ingredientes").trim().split(",");
 		for(String s : aux) {
 			if(saIng.consulta(s.trim()) == null) {
-				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_KO, "Ingrediente: "+s+" no encontrado");
+				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_PLATO_VISTA).actualizar(Evento.ALTA_PLATO_KO, "Ingrediente: "+ s +" no encontrado");
 				return;
 			}
-			ingredientes.add(s.trim());
 		}
 		
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
@@ -419,9 +417,9 @@ public class ControladorImp extends Controlador { //implementacion
 	}
 	
 	private void bajaPlato(Object datos) {
-		String id = datos.toString();
+		String nombre = datos.toString();
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
-		boolean resultado = saPlato.borrar(id);
+		boolean resultado = saPlato.borrar(nombre);
 		if (resultado) {
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BAJA_PLATO_VISTA).actualizar(Evento.BAJA_PLATO_OK, resultado);
 		}
