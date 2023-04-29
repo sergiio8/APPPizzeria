@@ -189,6 +189,25 @@ public class DAOPlatoIngredienteImp implements DAOPlatoIngrediente {
 		}
 		return true;
 	}
+	
+	public ArrayList<String> cogerIngredientes(String plato){
+		JSONArray ja = new JSONArray();
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/PlatoIngrediente.json"))){ //idea mandar excepciones y tratarlas en controlador
+			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
+			ja = jsonInput.getJSONArray("ListaPlatoIngrediente");
+		}
+		catch(Exception e1) {
+		}
+		ArrayList<String> ing = new ArrayList<String>();
+		for(int i = 0; i<ja.length(); i++) {
+			JSONObject aux = ja.getJSONObject(i);
+			if(aux.getString("nombrePlato").equals(plato)) {
+				ing.add(aux.getString("nombreIngrediente"));
+			}
+		}
+		
+		return ing;
+	}
 
 	@Override//Lo tiene que hacer el subsistema producto
 	public boolean modificaPlato(TPlato plato) {

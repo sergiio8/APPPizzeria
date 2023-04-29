@@ -63,7 +63,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		pricePanel.add(priceText);
 		
 		contenedor.add(pricePanel);
-		
+		/*
 		//Ingredientes
 		JPanel ingredientsPanel = new JPanel(new FlowLayout());
 		JLabel ingredientsLabel = new JLabel("Ingredientes: ");
@@ -73,7 +73,7 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 		ingredientsPanel.add(ingredientsText);
 		
 		contenedor.add(ingredientsPanel);
-
+		 */
 		//Descripcion
 		JPanel descriptionPanel= new JPanel(new FlowLayout());
 		JLabel descriptionLabel = new JLabel("Descripcion: ");
@@ -127,22 +127,24 @@ public class AnadirPlatoVista extends JDialog implements IGUI{
 				if(precio <= 0) {
 					throw new NumberFormatException();
 				}
+				/*
 				String[] aux = ingredientsText.getText().trim().split(",");
 				if(aux == null || aux[0].equals(""))
 					throw new IllegalArgumentException("El plato debe tener ingredientes");
 				for(String s : aux)
 					ingredientes.add(s.trim());
+					*/
 				descripcion = descriptionText.getText();
 				if(descripcion == null || descripcion.equals(""))
 					throw new IllegalArgumentException("El plato debe tener descripcion");
 				if(entranteButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TEntrante(nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TEntrante(nombre,precio,descripcion));
 				}
 				else if(pizzaButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPizza(nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPizza(nombre,precio,descripcion));
 				}
 				else if(postreButton.isSelected()) {
-					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPostre(nombre,precio,ingredientes,descripcion));
+					Controlador.getInstance().accion(Evento.ALTA_PLATO, new TPostre(nombre,precio,descripcion));
 				}
 				else {
 					throw new IllegalArgumentException("Indique el tipo del plato");

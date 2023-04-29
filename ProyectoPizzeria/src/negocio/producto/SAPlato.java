@@ -1,5 +1,6 @@
 package negocio.producto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public interface SAPlato {
@@ -10,4 +11,5 @@ public interface SAPlato {
 	Boolean modificar(TPlato tp);
 	Boolean borrar(String id);
 	//boolean puede_hacerse(TPlato plato);
+	ArrayList<String> cogerIngredientes(String plato);
 }

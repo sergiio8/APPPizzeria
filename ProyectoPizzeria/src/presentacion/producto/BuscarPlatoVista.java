@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.json.JSONObject;
+
 import negocio.producto.TPlato;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -124,21 +126,24 @@ public class BuscarPlatoVista extends JDialog implements IGUI{
 			break;
 		case BUSCAR_PLATO_OK:
 			JOptionPane.showMessageDialog(this, "Plato encontrado", "Plato encontrado", JOptionPane.INFORMATION_MESSAGE);
-			TPlato tp = (TPlato) datos;
+			JSONObject obj = (JSONObject)datos;
+			TPlato tp = (TPlato) obj.get("plato");
 			nameText.setEnabled(false);
 			
 			typeLabel = new JLabel("Tipo: " + tp.getTipo());
 			typePanel.add(typeLabel);
 			priceLabel = new JLabel("Precio: " + tp.getPrecio());
 			pricePanel.add(priceLabel);
+			
 			String ingredientes = "";
-			ArrayList<String> aux = tp.getIngredientes();
+			ArrayList<String> aux = (ArrayList<String>) obj.get("ingredientes");
 			int i = 0;
 			while(i<aux.size()-1)
 				ingredientes += aux.get(i++) + ", ";
 			ingredientes += aux.get(i) + '"';
 			ingredientsLabel = new JLabel("Ingredientes: " + ingredientes);
 			ingredientsPanel.add(ingredientsLabel);
+			
 			descriptionLabel = new JLabel("Descripcion: " + tp.getDescripcion());
 			descriptionPanel.add(descriptionLabel);
 			

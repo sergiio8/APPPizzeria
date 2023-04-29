@@ -1,8 +1,10 @@
 package negocio.producto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.ingredientes.DAOPlatoIngrediente;
 import integracion.producto.DAOPlato;
 
 public class SAPlatoImp implements SAPlato {
@@ -47,7 +49,12 @@ public class SAPlatoImp implements SAPlato {
 		return daoPlato.daDeBajaPlato(nombre);
 	}
 
-	
+	@Override
+	public ArrayList<String> cogerIngredientes(String plato) {
+		DAOPlatoIngrediente daoPlatoIngrediente = FactoriaAbstractaIntegracion.getInstace().crearDAOPlatoIngrediente();
+		return daoPlatoIngrediente.cogerIngredientes(plato);
+	}
+
 
 
 	

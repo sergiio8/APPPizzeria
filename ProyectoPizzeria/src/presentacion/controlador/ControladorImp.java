@@ -20,6 +20,7 @@ import negocio.ingredientes.TPlatoIngrediente;
 import presentacion.Evento;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -202,8 +203,7 @@ public class ControladorImp extends Controlador { //implementacion
 			break;
 			
 		case LISTAR_PLATOS:
-			Collection<TPlato> platos = listarPlatos();
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_PLATOS).actualizar(Evento.LISTAR_PLATOS, platos);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_PLATOS).actualizar(Evento.LISTAR_PLATOS, listarPlatos());
 			break;
 			
 		case VISTA_PRINCIPAL_INGREDIENTE:
@@ -419,23 +419,33 @@ public class ControladorImp extends Controlador { //implementacion
 	}
 	
 	private void buscaPlato(Object datos) {
-		String id = datos.toString();
+		String nombre = datos.toString();
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
 		
-		TPlato buscar = saPlato.consulta(id);
 		
-		if(buscar == null) {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_PLATO_VISTA).actualizar(Evento.BUSCAR_PLATO_KO, buscar);
+		TPlato plato = saPlato.consulta(nombre);
+		
+		if(plato == null) {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_PLATO_VISTA).actualizar(Evento.BUSCAR_PLATO_KO, plato);
 		}
 		else {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_PLATO_VISTA).actualizar(Evento.BUSCAR_PLATO_OK, buscar);
+			ArrayList<String> ingredientes = saPlato.cogerIngredientes(nombre);
+			JSONObject jo = new JSONObject();
+			jo.put("plato", plato);
+			jo.put("ingredientes", ingredientes);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BUSCAR_PLATO_VISTA).actualizar(Evento.BUSCAR_PLATO_OK, jo);
 		}
 	}
 	
-	private Collection<TPlato> listarPlatos() {
-		SAPlato saPlatos = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
-		Collection<TPlato> platos = saPlatos.consultaTodos();
-		return platos;
+	private ArrayList<Pair<TPlato,ArrayList<String>>> listarPlatos() {
+		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
+		ArrayList<TPlato> platos = new ArrayList<TPlato>(saPlato.consultaTodos());
+		ArrayList<Pair<TPlato,ArrayList<String>>> datos = new ArrayList<Pair<TPlato,ArrayList<String>>>();
+		for(int i=0; i< platos.size();i++) {
+			ArrayList<String> ing = saPlato.cogerIngredientes(platos.get(i).getNombre());
+			datos.add(new Pair<TPlato,ArrayList<String>>(platos.get(i),ing));
+		}
+		return datos;
 	}
 	
 	private void altaFactura(Object datos) {
