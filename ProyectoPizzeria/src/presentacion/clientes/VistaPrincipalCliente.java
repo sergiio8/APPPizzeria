@@ -56,7 +56,7 @@ public class VistaPrincipalCliente extends JFrame implements IGUI{
 		
 		bajaButton = new JButton("Baja Cliente");
 		bajaButton.addActionListener((e)->{
-			Controlador.getInstance().accion(Evento.BAJA_MESA_VISTA, null);
+			Controlador.getInstance().accion(Evento.VISTA_BAJA_CLIENTE, null);
 		});
 		buttonsPanel.add(bajaButton);
 		
