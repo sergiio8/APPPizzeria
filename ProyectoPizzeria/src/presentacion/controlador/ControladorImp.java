@@ -163,13 +163,15 @@ public class ControladorImp extends Controlador { //implementacion
 		case MODIFICAR_CLIENTE:
 			modificarCliente(datos);
 			break;
-		case VISTA_CLIENTE_LOGUEADO:
+		case VISTA_CLIENTE_LOGUEADO://fuera
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_MODIFICAR_CLIENTE).actualizar(Evento.VISTA_CLIENTE_LOGUEADO, null);
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_LOGUEADO).actualizar(Evento.VISTA_CLIENTE_LOGUEADO, datos);
 			break;
+		case VISTA_BAJA_CLIENTE:
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_BAJA_CLIENTE).actualizar(Evento.VISTA_BAJA_CLIENTE, datos);
+			break;
 		case BAJA_CLIENTE:
 			bajaCliente(datos);
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_LOGUEADO).actualizar(Evento.BAJA_CLIENTE, null);
 			break;
 		case CONSULTAR_DATOS_CLIENTE:
 			consultarCliente(datos);
@@ -554,7 +556,13 @@ public class ControladorImp extends Controlador { //implementacion
 	
 	private void bajaCliente(Object datos) {
 		SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
-		infoCliente.borrar((String)datos);
+		boolean c = infoCliente.borrar((String)datos);
+		if(c) {
+			FactoriaPresentacion.getInstace().createVista(Evento.VISTA_BAJA_CLIENTE).actualizar(Evento.BAJA_CLIENTE_OK, datos);
+		}
+		else {
+			FactoriaPresentacion.getInstace().createVista(Evento.VISTA_BAJA_CLIENTE).actualizar(Evento.BAJA_CLIENTE_KO, datos);
+		}
 	}
 	
 	private void consultarCliente(Object datos) {
