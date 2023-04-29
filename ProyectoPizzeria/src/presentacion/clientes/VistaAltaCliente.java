@@ -128,12 +128,12 @@ public class VistaAltaCliente extends JDialog implements IGUI{
 		case VISTA_ALTA_CLIENTE:
 			this.setVisible(true);
 			break;
-		case VISTA_ALTA_CLIENTE_OK:
+		case ALTA_CLIENTE_OK:
 			TCliente cliente = (TCliente)datos;
 			JOptionPane.showMessageDialog(this, "El cliente con id " + cliente.getId() + "ha sido modificado", "Cliente modificado con éxito", JOptionPane.INFORMATION_MESSAGE);
 			this.setVisible(false);
 			break;
-		case VISTA_ALTA_CLIENTE_KO:
+		case ALTA_CLIENTE_KO:
 			TCliente cliente2 = (TCliente)datos;
 			JOptionPane.showMessageDialog(this, "ERROR: no se ha podido modificar cliente con id " + cliente2.getId(), "ERROR: Cliente no modificado", JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);

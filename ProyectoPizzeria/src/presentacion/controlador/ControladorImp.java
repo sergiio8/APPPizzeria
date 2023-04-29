@@ -521,7 +521,7 @@ public class ControladorImp extends Controlador { //implementacion
 		SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
 		TCliente c = infoCliente.consulta((String)datos);
 		if (c == null) {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento. VISTA_PRINCIPAL_CLIENTES).actualizar(Evento.VISTA_ALTA_CLIENTE_KO, datos);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento. VISTA_PRINCIPAL_CLIENTES).actualizar(Evento.ALTA_CLIENTE_KO, datos);
 		}
 		else {
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_LOGUEADO).actualizar(Evento.VISTA_CLIENTE_LOGUEADO, datos);
@@ -534,10 +534,10 @@ public class ControladorImp extends Controlador { //implementacion
 		SAClientes infoCliente = FactoriaAbstractaNegocio.getInstace().crearSAClientes();
 		String c = infoCliente.alta(cliente);
 		if(c == null) {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_ALTA_CLIENTE).actualizar(Evento.VISTA_ALTA_CLIENTE_KO, cliente.getId());
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_ALTA_CLIENTE).actualizar(Evento.ALTA_CLIENTE_KO, cliente.getId());
 		}
 		else {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_ALTA_CLIENTE).actualizar(Evento.VISTA_ALTA_CLIENTE_OK, cliente.getId());
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_ALTA_CLIENTE).actualizar(Evento.ALTA_CLIENTE_OK, cliente.getId());
 		}
 	}
 	

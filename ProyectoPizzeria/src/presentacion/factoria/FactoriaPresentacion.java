@@ -52,9 +52,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaBorrarMesa = null;
 	private IGUI vistaModificarMesa = null;
 	private IGUI vistaBuscarMesa = null;
-	private IGUI vistaClienteLogueado = null;
 	private IGUI vistaPrincipalClientes = null;
-	private IGUI vistaRegistrarCliente = null;
+	private IGUI vistaAltaCliente = null;
+	private IGUI vistaListarClientes = null;
+	private IGUI vistaBajaCliente = null;
 	private IGUI vistaModificarCliente = null;
 	private IGUI vistaPrincipalFactura = null;
 	private IGUI vistaAltaFactura = null;
@@ -125,21 +126,27 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		case VISTA_PRINCIPAL_CLIENTES:
 			vistaPrincipalClientes = new VistaPrincipalCliente();
 			return vistaPrincipalClientes;
-		case VISTA_CLIENTE_LOGUEADO://cambiar
-			if(vistaClienteLogueado == null) {
-				vistaClienteLogueado= new VistaClienteLogueado((Frame)vistaPrincipalClientes);
+		case VISTA_ALTA_CLIENTE://cambiar
+			if(vistaAltaCliente == null) {
+				vistaAltaCliente= new VistaAltaCliente((Frame)vistaPrincipalClientes);
 			}
-			return vistaClienteLogueado;
-		case VISTA_REGISTRO_DE_CLIENTE://cambiar
-			if(vistaRegistrarCliente == null) {
-				vistaRegistrarCliente= new VistaRegistrarCliente((Frame)vistaPrincipalClientes);
-			}
-			return vistaRegistrarCliente;
+			return vistaAltaCliente;
 		case VISTA_MODIFICAR_CLIENTE:
 			if(vistaModificarCliente == null) {
 				vistaModificarCliente= new VistaModificarCliente((Frame)vistaPrincipalClientes);
 			}
 			return vistaModificarCliente;
+		case VISTA_BAJA_CLIENTE:
+			if(vistaBajaCliente == null) {
+				vistaBajaCliente= new VistaBajaCliente((Frame)vistaPrincipalClientes);
+			}
+			return vistaBajaCliente;
+		case VISTA_LISTAR_CLIENTES:
+			if(vistaListarClientes == null) {
+				vistaListarClientes= new VistaListarClientes((Frame)vistaPrincipalClientes);
+			}
+			return vistaListarClientes;
+			
 		case VISTA_PRINCIPAL_FACTURA:
 			this.vistaPrincipalFactura = new VistaPrincipalFacturas();
 			return vistaPrincipalFactura;
