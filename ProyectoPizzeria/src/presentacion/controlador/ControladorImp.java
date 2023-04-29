@@ -157,15 +157,10 @@ public class ControladorImp extends Controlador { //implementacion
 			altaCliente(datos);
 			break;
 		case VISTA_MODIFICAR_CLIENTE:
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_LOGUEADO).actualizar(Evento.VISTA_MODIFICAR_CLIENTE, null);
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_MODIFICAR_CLIENTE).actualizar(Evento.VISTA_MODIFICAR_CLIENTE, datos);
 			break;
 		case MODIFICAR_CLIENTE:
 			modificarCliente(datos);
-			break;
-		case VISTA_CLIENTE_LOGUEADO://fuera
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_MODIFICAR_CLIENTE).actualizar(Evento.VISTA_CLIENTE_LOGUEADO, null);
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_CLIENTE_LOGUEADO).actualizar(Evento.VISTA_CLIENTE_LOGUEADO, datos);
 			break;
 		case VISTA_BAJA_CLIENTE:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_BAJA_CLIENTE).actualizar(Evento.VISTA_BAJA_CLIENTE, datos);
