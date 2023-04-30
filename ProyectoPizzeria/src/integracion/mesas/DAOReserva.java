@@ -12,4 +12,5 @@ public interface DAOReserva {
 	Boolean modificaReserva(TReserva tr);
 	Collection<TReserva> consultaTodos();
 	public Collection<TReserva> consultaTodosCliente(String id);
+	public Collection<TReserva> consultaTodosMesas(Integer id);
 }

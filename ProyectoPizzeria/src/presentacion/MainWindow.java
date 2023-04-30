@@ -81,6 +81,10 @@ public class MainWindow extends JFrame implements IGUI{
 		buttonsPanel.add(facturasButton);
 		
 		reservasButton = new JButton("Reservas");
+		reservasButton.addActionListener((e) -> {
+			Controlador.getInstance().accion(Evento.VISTA_PRINCIPAL_RESERVA, null);
+			this.dispose();
+		});
 		buttonsPanel.add(reservasButton);
 		
 		mainPanel.add(buttonsPanel, BorderLayout.CENTER);

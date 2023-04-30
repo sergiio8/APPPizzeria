@@ -108,8 +108,33 @@ public class DAOReservaImp implements DAOReserva{
 
 	@Override
 	public TReserva obtenReserva(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONArray ja = null;
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/Reservas.json"))){ //idea mandar excepciones y tratarlas en controlador
+			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
+			ja = jsonInput.getJSONArray("ListaReservas");
+		}
+		catch(Exception e1) {
+			throw new IllegalArgumentException("No se ha podido acceder al fichero JSON");
+		}
+		
+		int i = 0;
+		while(i < ja.length() && ja.getJSONObject(i).getInt("id") != id) {
+			i++;
+		}
+		if(i == ja.length()) {
+			return null;
+		}
+		else {
+			Date date;
+			try {
+				date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(ja.getJSONObject(i).getString("fecha"));
+				return new TReserva(ja.getJSONObject(i).getInt("idMesa"),ja.getJSONObject(i).getString("idCliente")  ,date,ja.getJSONObject(i).getInt("id"));
+			}
+			catch(Exception e) {
+				return null;
+			}
+			
+		}
 	}
 
 	@Override
@@ -145,7 +170,7 @@ public class DAOReservaImp implements DAOReserva{
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter("ProyectoPizzeria/resources/Reservas.json", false))){
 			JSONObject jo2 = new JSONObject();
-			jo2.put("ListaMesas", ja);
+			jo2.put("ListaReservas", ja);
 			bw.write(jo2.toString());
 			
 		} 
@@ -180,7 +205,7 @@ public class DAOReservaImp implements DAOReserva{
 				resultado.add( new TReserva(ja.getJSONObject(i).getInt("idMesa"),ja.getJSONObject(i).getString("idCliente")  ,date,ja.getJSONObject(i).getInt("id")));
 				i++;
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+
 				i++;
 			}
 			
@@ -215,7 +240,41 @@ public class DAOReservaImp implements DAOReserva{
 				}
 				i++;
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				i++;
+			}
+			
+		}
+		return resultado;
+	}
+
+	@Override
+	public Collection<TReserva> consultaTodosMesas(Integer id) {
+		Collection<TReserva> resultado = new ArrayList<TReserva>();
+		JSONArray ja = null;
+		try(InputStream in = new FileInputStream(new File("ProyectoPizzeria/resources/Reservas.json"))){ //idea mandar excepciones y tratarlas en controlador
+			JSONObject jsonInput = new JSONObject (new JSONTokener(in));
+			ja = jsonInput.getJSONArray("ListaReservas");
+			
+		}
+		catch(Exception e1) {
+			
+			return resultado;
+		}
+		
+		int i = 0;
+		Date date;
+		int idMesa;
+
+		while(i < ja.length()) {
+			try {
+				idMesa = ja.getJSONObject(i).getInt("idMesa");
+				if(id.equals(idMesa)) {
+					date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(ja.getJSONObject(i).getString("fecha"));
+					resultado.add( new TReserva(idMesa,ja.getJSONObject(i).getString("idCliente")  ,date,ja.getJSONObject(i).getInt("id")));
+				}
+				i++;
+			} catch (Exception e) {
+
 				i++;
 			}
 			

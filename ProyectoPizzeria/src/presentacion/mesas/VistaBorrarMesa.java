@@ -114,8 +114,16 @@ public class VistaBorrarMesa extends JDialog implements IGUI{
 			}
 			setVisible(false);
 			break;
+		case BAJA_MESA_RES_KO:
+			
+			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
+			
+			setVisible(false);
+			break;
 		}
-		
+	
 	}
+		
+	
 
 }

@@ -21,12 +21,12 @@ import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 
-public class VistaListarReservasPorCliente extends JDialog implements IGUI{
+public class VistaListarReservasPorMesa extends JDialog implements IGUI{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel idClienteLabel;
-	private JTextField idClienteField;
+	private JLabel idMesaLabel;
+	private JTextField idMesaField;
 	private JButton okButton;
 	private JButton cancelButton;
 	private JPanel buttonsPanel;
@@ -35,10 +35,10 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 	private JPanel tablaPanel;
 	private ModeloTablaReservas tableModel;
 	
-	public VistaListarReservasPorCliente(Frame parent) {
+	public VistaListarReservasPorMesa(Frame parent) {
 		super(parent, true);
 		
-		setTitle("Listar Reservas por Cliente");
+		setTitle("Listar Reservas por Mesa");
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		setContentPane(mainPanel);
@@ -48,12 +48,12 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 		JPanel idPanel = new JPanel();
 		
 		
-		this.idClienteLabel = new JLabel("idCliente: ");
-		idPanel.add(idClienteLabel);
+		this.idMesaLabel = new JLabel("idMesa: ");
+		idPanel.add(idMesaLabel);
 		
-		this.idClienteField = new JTextField(10);
+		this.idMesaField = new JTextField(10);
 		//this.idMesaField.setPreferredSize(new Dimension(130, 30));
-		idPanel.add(idClienteField);
+		idPanel.add(idMesaField);
 		
 		
 		mainPanel.add(idPanel, BorderLayout.NORTH);
@@ -66,19 +66,17 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 		
 		this.okButton = new JButton("OK");
 		this.okButton.addActionListener((e) ->{
-			String id;
-			
-			id = idClienteField.getText();
-			if(id == "" || id == null) {
-				JOptionPane.showMessageDialog(VistaListarReservasPorCliente.this, "ERROR: Rellene los campos", "ERROR: Rellene los campos", JOptionPane.ERROR_MESSAGE);
+			int id;
+			try {
+				id = Integer.parseInt(this.idMesaField.getText());
+				if(id < 1) {
+					throw new NumberFormatException();
+				}
+				Controlador.getInstance().accion(Evento.LISTAR_RESERVAS_MESAS, id);
 			}
-				
-			Controlador.getInstance().accion(Evento.LISTAR_RESERVAS_CLIENTE, id);
-				
-			
-			
-			
-			
+			catch(NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(VistaListarReservasPorMesa.this, "ERROR: El id de la mesa debe ser un entero positivo", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 			
 		});
 		
@@ -106,11 +104,11 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 	@Override
 	public void actualizar(Evento e, Object datos) {
 		switch(e) {
-		case LISTAR_RESERVAS_CLIENTE_VISTA:
+		case LISTAR_RESERVAS_MESAS_VISTA:
 			buttonsPanel.removeAll();
 			buttonsPanel.add(this.okButton);
 			buttonsPanel.add(this.cancelButton);
-			this.idClienteField.setEnabled(true);
+			this.idMesaField.setEnabled(true);
 			if(tablaPanel != null) {
 				tablaPanel.removeAll();
 			}
@@ -119,7 +117,7 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 			pack();
 			setVisible(true);
 			break;
-		case LISTAR_RESERVAS_CLIENTE_OK:
+		case LISTAR_RESERVAS_MESAS_OK:
 			
 			JOptionPane.showMessageDialog(this, "Reservas encontradas", "Reservas encontradas", JOptionPane.INFORMATION_MESSAGE);
 			
@@ -131,7 +129,7 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 			tableModel.update(datos);
 			this.getContentPane().add(tablaPanel, BorderLayout.CENTER);
-			this.idClienteField.setEnabled(false);
+			this.idMesaField.setEnabled(false);
 			this.buttonsPanel.removeAll();
 			JButton confirmButton = new JButton("Confirmar");
 			confirmButton.addActionListener((event)->{
@@ -145,7 +143,7 @@ public class VistaListarReservasPorCliente extends JDialog implements IGUI{
 			
 			
 			break;
-		case LISTAR_RESERVAS_CLIENTE_KO:
+		case LISTAR_RESERVAS_MESAS_KO:
 			JOptionPane.showMessageDialog(this, "ERROR: " + datos.toString(), "ERROR: " + datos.toString(), JOptionPane.ERROR_MESSAGE);
 			break;
 		}
