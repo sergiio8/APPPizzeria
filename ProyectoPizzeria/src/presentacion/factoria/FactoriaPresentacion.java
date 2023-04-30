@@ -16,9 +16,11 @@ import presentacion.mesas.VistaBuscarMesa;
 import presentacion.mesas.VistaListarMesas;
 import presentacion.mesas.VistaListarReservas;
 import presentacion.mesas.VistaListarReservasPorCliente;
+import presentacion.mesas.VistaListarReservasPorMesa;
 import presentacion.mesas.VistaModificarMesa;
 import presentacion.mesas.VistaModificarReserva;
 import presentacion.mesas.VistaPrincipalMesas;
+import presentacion.mesas.VistaPrincipalReservas;
 import presentacion.producto.AnadirPlatoVista;
 import presentacion.producto.BuscarPlatoVista;
 import presentacion.producto.EliminarPlatoVista;
@@ -51,6 +53,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 	private IGUI vistaBorrarReserva = null;
 	private IGUI vistaAnadirMesa = null;
 	private IGUI vistaListarReservasCliente = null;
+	private IGUI vistaListarReservasMesa = null;
 	private IGUI vistaBorrarMesa = null;
 	private IGUI vistaModificarMesa = null;
 	private IGUI vistaBuscarMesa = null;
@@ -82,6 +85,9 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 		switch(e) {
 		case MAIN_WINDOW:
 			return new presentacion.MainWindow();
+		case VISTA_PRINCIPAL_RESERVA:
+			this.vistaPrincipalReserva = new VistaPrincipalReservas();
+			return vistaPrincipalReserva;
 		case ALTA_RESERVA_VISTA:
 			if(this.vistaAnadirReserva == null) {
 				vistaAnadirReserva =new VistaAnadirReserva((Frame) vistaPrincipalReserva);
@@ -91,12 +97,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 			if(this.vistaBorrarReserva == null) {
 				vistaBorrarReserva =new VistaBorrarReserva((Frame) vistaPrincipalReserva);
 			}
-			return vistaAnadirReserva;
+			return vistaBorrarReserva;
 		case MODIFICAR_RESERVA_VISTA:
 			if(this.vistaModificarReserva == null) {
 				vistaModificarReserva =new VistaModificarReserva((Frame) vistaPrincipalReserva);
 			}
-			return vistaAnadirReserva;
+			return vistaModificarReserva;
 		case LISTAR_RESERVAS:
 			return new VistaListarReservas((Frame) vistaPrincipalReserva);
 		case LISTAR_RESERVAS_CLIENTE_VISTA:
@@ -104,6 +110,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion{
 				vistaListarReservasCliente = new VistaListarReservasPorCliente((Frame) vistaPrincipalReserva);
 			}
 			return vistaListarReservasCliente;
+		case LISTAR_RESERVAS_MESAS_VISTA:
+			if(vistaListarReservasMesa == null) {
+				vistaListarReservasMesa = new VistaListarReservasPorMesa((Frame) vistaPrincipalReserva);
+			}
+			return vistaListarReservasMesa;
 			
 		case VISTA_PRINCIPAL_MESA:
 			this.vistaPrincipalMesa = new VistaPrincipalMesas();

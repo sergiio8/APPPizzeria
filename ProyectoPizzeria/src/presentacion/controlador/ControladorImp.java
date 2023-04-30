@@ -72,9 +72,21 @@ public class ControladorImp extends Controlador { //implementacion
 			catch(Exception er) {
 				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_RESERVAS_CLIENTE_VISTA).actualizar(Evento.LISTAR_RESERVAS_CLIENTE_KO, er.getMessage());
 			}
-			
-			
-			
+			break;
+		case LISTAR_RESERVAS_MESAS_VISTA:
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_RESERVAS_MESAS_VISTA).actualizar(Evento.LISTAR_RESERVAS_MESAS_VISTA, null);
+			break;
+		case LISTAR_RESERVAS_MESAS:
+			try {
+				Collection<TReserva> reservasM= listarReservasMesa(datos);
+				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_RESERVAS_MESAS_VISTA).actualizar(Evento.LISTAR_RESERVAS_MESAS_OK, reservasM);
+			}
+			catch(Exception er) {
+				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.LISTAR_RESERVAS_MESAS_VISTA).actualizar(Evento.LISTAR_RESERVAS_MESAS_KO, er.getMessage());
+			}
+			break;
+		case VISTA_PRINCIPAL_RESERVA:
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_PRINCIPAL_RESERVA);
 			break;
 		case VISTA_PRINCIPAL_MESA:
 			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.VISTA_PRINCIPAL_MESA);
@@ -263,6 +275,11 @@ public class ControladorImp extends Controlador { //implementacion
         	break;
 	}
 }
+	private Collection<TReserva> listarReservasMesa(Object datos) {
+		SAMesas saMesas = FactoriaAbstractaNegocio.getInstace().crearSAMesas();
+		Collection<TReserva> reservas = saMesas.consultaTodosRMesa(Integer.parseInt(datos.toString()));
+		return reservas;
+	}
 	private Collection<TReserva> listarReservasCliente(Object datos) {
 		SAMesas saMesas = FactoriaAbstractaNegocio.getInstace().crearSAMesas();
 		Collection<TReserva> reservas = saMesas.consultaTodosRCliente(datos.toString());
@@ -384,8 +401,15 @@ public class ControladorImp extends Controlador { //implementacion
 	private void bajaMesa(Object datos) {
 		int id = Integer.parseInt(datos.toString());
 		SAMesas saMesas2 = FactoriaAbstractaNegocio.getInstace().crearSAMesas();
-		boolean res2 = saMesas2.borrar(id);
-		FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BAJA_MESA_VISTA).actualizar(Evento.BAJA_MESA_RES, res2);
+		try {
+			boolean res2 = saMesas2.borrar(id);
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BAJA_MESA_VISTA).actualizar(Evento.BAJA_MESA_RES, res2);
+		}
+		catch(Exception e) {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.BAJA_MESA_VISTA).actualizar(Evento.BAJA_MESA_RES_KO, e.getMessage());
+		}
+		
+		
 	}
 	
 	private void modificaMesa(Object datos) {

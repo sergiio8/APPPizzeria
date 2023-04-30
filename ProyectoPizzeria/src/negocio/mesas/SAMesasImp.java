@@ -1,6 +1,10 @@
 package negocio.mesas;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 
 import integracion.clientes.DAOClientes;
 import integracion.factoria.FactoriaAbstractaIntegracion;
@@ -54,6 +58,16 @@ public class SAMesasImp implements SAMesas{
 
 	@Override
 	public Boolean borrar(Integer id) {
+		DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
+		Collection<TReserva> reservas = daoR.consultaTodosMesas(id);
+		Iterator<TReserva> it = reservas.iterator();
+		boolean exito = true;
+		while(it.hasNext() && exito) {
+			exito = it.next().getFecha().before(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		}
+		if(!exito) {
+			throw new IllegalArgumentException("No se puede dar de baja la mesa, existen reservas proximas");
+		}
 		DAOMesas daoMesas = FactoriaAbstractaIntegracion.getInstace().crearDAOMesas();
 		return daoMesas.daDeBajaMesa(id);
 	}
@@ -64,7 +78,7 @@ public class SAMesasImp implements SAMesas{
 		
 		DAOMesas daoMesas = FactoriaAbstractaIntegracion.getInstace().crearDAOMesas();
 		DAOClientes daoClientes = FactoriaAbstractaIntegracion.getInstace().crearDAOCliente();
-		
+		DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
 		if(tr != null) {
 			TMesas esta = daoMesas.obtenMesa(tr.getIdMesa());
 			//TCliente estaC = daoClientes.obtenCliente(tr.getIdCliente());
@@ -74,7 +88,15 @@ public class SAMesasImp implements SAMesas{
 			/*if(estaC == null) {
 				throw new IllegalArgumentException("Cliente no existente");
 			}*/
-			DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
+			Collection<TReserva> reservas = daoR.consultaTodosMesas(tr.getIdMesa());
+			Iterator<TReserva> it = reservas.iterator();
+			boolean exito = true;
+			while(it.hasNext() && exito) {
+				exito = !it.next().getFecha().equals(tr.getFecha());
+			}
+			if(!exito) {
+				throw new IllegalArgumentException("Ya existe una reserva para esa hora en esa mesa");
+			}
 			
 			id = daoR.insertaReserva(tr);
 			
@@ -103,6 +125,16 @@ public class SAMesasImp implements SAMesas{
 			if(estaR == null) {
 				throw new IllegalArgumentException("Reserva no existente");
 			}
+			Collection<TReserva> reservas = daoR.consultaTodosMesas(tr.getIdMesa());
+			Iterator<TReserva> it = reservas.iterator();
+			boolean exito = true;
+			while(it.hasNext() && exito) {
+				exito = !it.next().getFecha().equals(tr.getFecha());
+			}
+			if(!exito) {
+				throw new IllegalArgumentException("Ya existe una reserva para esa hora en esa mesa");
+			}
+			
 			
 			
 			return daoR.modificaReserva(tr);
@@ -145,6 +177,17 @@ public class SAMesasImp implements SAMesas{
 		}
 		DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
 		return daoR.consultaTodosCliente(id);
+	}
+
+	@Override
+	public Collection<TReserva> consultaTodosRMesa(Integer id) {
+		DAOMesas daoMesas = FactoriaAbstractaIntegracion.getInstace().crearDAOMesas();
+		TMesas estaM = daoMesas.obtenMesa(id);
+		if(estaM == null) {
+			throw new IllegalArgumentException("Mesa no existente");
+		}
+		DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
+		return daoR.consultaTodosMesas(id);
 	}
 
 }
