@@ -15,6 +15,7 @@ import negocio.mesas.TMesas;
 import negocio.producto.TPlato;
 
 public class SAFacturaImp implements SAFactura{
+	
     
     public SAFacturaImp() {
         
@@ -45,7 +46,7 @@ public class SAFacturaImp implements SAFactura{
             }
             fact = daof.buscarFactura(id);
             if (fact == null) {
-                fact = new TFactura(id, precio_total, datos, true);
+                fact = new TFactura(id, precio_total, datos, false);
                 daof.crearFactura(fact);
             }
             else return false;
@@ -70,11 +71,14 @@ public class SAFacturaImp implements SAFactura{
         
     }
 
-    @Override
-    public void anadirProducto(TLineaFactura linea, Carrito c) {
-        c.anadirProducto(linea);
-        // TODO Auto-generated method stub
-    }
+	@Override
+	public void anadirProducto(TLineaFactura linea, Carrito c) {
+		c.anadirProducto(linea);
+	}
+
+
+    
+ 
     
 
 }
