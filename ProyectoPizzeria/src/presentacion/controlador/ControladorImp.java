@@ -29,8 +29,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 public class ControladorImp extends Controlador { //implementacion
-	
-
+	private Carrito carrito;
 	@Override
 	public void accion(Evento e, Object datos) {
 		switch(e) {
@@ -395,8 +394,6 @@ public class ControladorImp extends Controlador { //implementacion
 		}
 	}
 	
-	private Carrito carrito;
-	
 	private void bajaMesa(Object datos) {
 		int id = Integer.parseInt(datos.toString());
 		SAMesas saMesas2 = FactoriaAbstractaNegocio.getInstace().crearSAMesas();
@@ -529,15 +526,16 @@ public class ControladorImp extends Controlador { //implementacion
 		SAFactura saFact = FactoriaAbstractaNegocio.getInstace().crearSAFactura();
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
 		TDatosVenta dt = (TDatosVenta) datos;
-		carrito.cerrarVenta(dt);
-		if (saPlato.comprobarDisponibilidad(dt.getProductos()) != null) {
-			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA_WR, saPlato.comprobarDisponibilidad(dt.getProductos()));
+		dt.setProductos(carrito.getProductos());
+		String solu = saPlato.comprobarDisponibilidad(dt.getProductos());
+		if (solu != null) {
+			FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA_WR, solu);
 			carrito = new Carrito();
 		}
 		else {
 	        boolean sol = saFact.crearFactura(dt);
 	        if (sol) {
-	        	for(TLineaFactura linea : dt.getProductos()) saPlato.hacerPlato(linea.getIdProducto(), linea.getCantidad());
+	        	saPlato.hacerPedido(dt.getProductos());
 				FactoriaAbstractaPresentacion.getInstace().createVista(Evento.ALTA_FACTURA_VISTA).actualizar(Evento.ALTA_FACTURA_VISTA_OK, dt);
 		    }
 	        else {
