@@ -100,39 +100,10 @@ public class SAPlatoImp implements SAPlato {
 				return "El producto " + linea.getIdProducto() + " no está disponible";
 			}
 			else if (consulta(linea.getIdProducto()) == null) {
-				return "El producto " + " no existe";
+				return "El producto " + linea.getIdProducto() + " no existe";
 			}
 		}
 		return null;
 	}
-
-
-
-	
-	/*public boolean puede_hacerse(TPlato plato) {
-		DAOIngrediente daoi = FactoriaAbstractaIntegracion.getInstace().crearDAOIngrediente();
-		boolean se_puede = true;
-		for (int i = 0; i < plato.getIngredientes().size() && se_puede; ++i) {
-			TIngrediente ti = daoi.cogerIngrediente(plato.getIngredientes().get(i).getNombre());
-			if (ti.getCantidad() == 0) se_puede = false;
-		}
-		
-		return se_puede;
-		
-	}
-	public boolean hacerPlato(String id) {
-		DAOPlato daoPlato = FactoriaAbstractaIntegracion.getInstace().crearDAOPlato();
-		TPlato plato = daoPlato.obtenPlato(id);
-		DAOIngrediente daoi = FactoriaAbstractaIntegracion.getInstace().crearDAOIngrediente();
-		boolean se_puede = puede_hacerse(plato);
-		if (se_puede) {
-			for (int i = 0; i < plato.getIngredientes().size() && se_puede; ++i) {
-				TIngrediente ti = daoi.cogerIngrediente(plato.getIngredientes().get(i).getNombre());
-				ti.setCantidad(ti.getCantidad() - 1);
-			}
-		}
-		
-		return se_puede;
-	}*/
 
 }
