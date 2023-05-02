@@ -61,9 +61,9 @@ public class SAPlatoImp implements SAPlato {
 		return daoPlato.obtenTodosPlatos();
 	}
 	
-	public ArrayList<TDatosPlato> listarPlatos(){
+	public Collection<TDatosPlato> listarPlatos(){
 		ArrayList<TPlato> platos = new ArrayList<TPlato>(consultaTodos());
-		ArrayList<TDatosPlato> datos = new ArrayList<TDatosPlato>();
+		Collection<TDatosPlato> datos = new ArrayList<TDatosPlato>();
 		for(int i=0; i< platos.size();i++) {
 			ArrayList<String> ing = cogerIngredientes(platos.get(i).getNombre());
 			datos.add(new TDatosPlato(platos.get(i),ing));

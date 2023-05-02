@@ -11,7 +11,7 @@ public interface SAPlato {
 	boolean modificar(TDatosPlato datos);
 	TPlato consulta(String id);
 	Collection<TPlato> consultaTodos();
-	ArrayList<TDatosPlato> listarPlatos();
+	Collection<TDatosPlato> listarPlatos();
 	ArrayList<String> cogerIngredientes(String plato);
 	boolean disponible(String nombre, int cantidad);
 	String comprobarDisponibilidad(ArrayList<TLineaFactura> productos);

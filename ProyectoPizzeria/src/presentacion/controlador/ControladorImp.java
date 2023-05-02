@@ -494,7 +494,7 @@ public class ControladorImp extends Controlador { //implementacion
 		}
 	}
 	
-	private ArrayList<TDatosPlato> listarPlatos() {
+	private Collection<TDatosPlato> listarPlatos() {
 		SAPlato saPlato = FactoriaAbstractaNegocio.getInstace().crearSAPlato();
 		return saPlato.listarPlatos();
 	}

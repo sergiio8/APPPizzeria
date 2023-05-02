@@ -1,6 +1,7 @@
 package presentacion.producto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -64,7 +65,7 @@ public class ModeloTablaPlato extends AbstractTableModel {
 	}
 	
 	public void update(Object datos) {
-		this.datos = (ArrayList<TDatosPlato>)datos;
+		this.datos = new ArrayList<TDatosPlato>((Collection<TDatosPlato>) datos);
 		fireTableStructureChanged();
 	}
 
