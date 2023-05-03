@@ -68,6 +68,10 @@ public class SAMesasImp implements SAMesas{
 		if(!exito) {
 			throw new IllegalArgumentException("No se puede dar de baja la mesa, existen reservas proximas");
 		}
+		it = reservas.iterator();
+		while(it.hasNext()) {
+			daoR.daDeBajaReserva(it.next().getId());
+		}
 		DAOMesas daoMesas = FactoriaAbstractaIntegracion.getInstace().crearDAOMesas();
 		return daoMesas.daDeBajaMesa(id);
 	}
