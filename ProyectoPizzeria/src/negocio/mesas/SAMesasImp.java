@@ -58,6 +58,7 @@ public class SAMesasImp implements SAMesas{
 
 	@Override
 	public Boolean borrar(Integer id) {
+		
 		DAOReserva daoR = FactoriaAbstractaIntegracion.getInstace().crearDAOReserva();
 		Collection<TReserva> reservas = daoR.consultaTodosMesas(id);
 		Iterator<TReserva> it = reservas.iterator();
