@@ -1,4 +1,1 @@
-# ProyectoIS2Pizzeria
--Subsistema Mesa y Reservas: Alejandro Parreño Minaya
-Para la baja de una mesa, se ha considerado no hacerla efectiva si existen reservas futuras para esa mesa.
--Subsistema Ingrediente: Luis Orofino y David Esparza
+This repository contains the source code for a Java application designed to manage the operational and administrative workflows of a pizzeria. The project focuses on applying software engineering principles, design patterns, and a clean architecture.
